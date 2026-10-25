@@ -3,29 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hemant Sharma — Senior iOS Developer (4+ YOE)</title>
+  <title>Hemant Sharma | Senior iOS Engineer</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts SF-like -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             apple: {
-              bg: '#000000',
-              card: '#161618',
-              cardHover: '#1c1c1e',
-              border: 'rgba(255, 255, 255, 0.08)',
-              blue: '#0071e3',
-              cyan: '#2997ff',
-              gray: '#86868b',
-              lightGray: '#f5f5f7'
+              dark: '#05070B',
+              card: '#0D1117',
+              border: '#1E293B',
+              blue: '#0A84FF',
+              cyan: '#30D158',
+              accent: '#5E5CE6',
+              gold: '#FFD60A'
             }
           }
         }
@@ -33,1339 +38,643 @@
     }
   </script>
   <style>
-    /* Smooth custom scrollbar */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #000; }
-    ::-webkit-scrollbar-thumb { background: #26262b; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3a3a40; }
+    body {
+      background-color: #05070B;
+      color: #F3F4F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
     .glass-nav {
-      background: rgba(18, 18, 20, 0.75);
+      background: rgba(5, 7, 11, 0.75);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .apple-glow {
-      box-shadow: 0 0 50px -10px rgba(41, 151, 255, 0.15);
+    .apple-card {
+      background: radial-gradient(circle at top left, rgba(30, 41, 59, 0.35), rgba(13, 17, 23, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .notch {
-      width: 80px;
-      height: 18px;
-      background: #000;
-      border-radius: 0 0 12px 12px;
-      margin: 0 auto;
+    .apple-card:hover {
+      border-color: rgba(10, 132, 255, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 25px rgba(10, 132, 255, 0.1);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 9999px;
     }
   </style>
 </head>
-<body class="bg-black text-[#f5f5f7] font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+<body class="selection:bg-blue-600/30 selection:text-blue-300">
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 bg-gradient-to-r from-blue-900/90 to-cyan-900/90 text-cyan-200 border border-cyan-400/40 rounded-full shadow-2xl backdrop-blur-xl text-xs font-semibold tracking-wide flex items-center gap-2 transition-all duration-300 opacity-0 pointer-events-none translate-y-[-10px]">
-    <svg class="w-4 h-4 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-    <span id="toast-text">Message</span>
-  </div>
-
-  <!-- TOP STICKY BAR WITH ZERO-REDIRECT PAGE SWITCHER -->
-  <header class="sticky top-0 z-40 glass-nav border-b border-white/[0.08]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
-      
-      <!-- Brand & Name -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-lg shadow-blue-500/20">
-          <div class="w-full h-full bg-black rounded-[14px] flex items-center justify-center">
-            <svg class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          </div>
+  <!-- PUBLIC NAVBAR (No admin button, pure professional Apple look) -->
+  <nav id="publicNavbar" class="sticky top-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-black text-sm">
+          
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span id="header-name" class="font-bold tracking-tight text-white text-base">Hemant Sharma</span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-blue-500/10 text-cyan-300 border border-blue-500/20">
-              @HemantSharma8076
-            </span>
-          </div>
-          <p class="text-[11px] text-zinc-400 hidden sm:block">Senior iOS Engineer • 4+ Years Experience</p>
+          <span class="font-bold text-sm tracking-tight text-white block">Hemant Sharma</span>
+          <span class="text-[11px] text-blue-400 font-mono tracking-wide">Senior iOS Engineer • 4+ YOE</span>
         </div>
       </div>
-
-      <!-- PAGE TOGGLER (SWITCH BETWEEN PUBLIC VIEW & ADMIN STUDIO) -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        
-        <!-- Free Hosting Permanent Link Button -->
-        <button onclick="openHostingModal()" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 transition-colors">
-          <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <span>Get Permanent Live URL</span>
+      <div class="flex items-center space-x-3">
+        <button onclick="copyCurrentShareLink()" class="flex items-center space-x-2 text-xs font-medium text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-800 px-3 py-1.5 rounded-full transition">
+          <i data-lucide="share-2" class="w-3.5 h-3.5 text-blue-400"></i>
+          <span>Share</span>
         </button>
-
-        <!-- The 2-Page Direct Toggle (Zero 404s!) -->
-        <div class="bg-zinc-900 border border-white/10 p-1 rounded-full flex items-center shadow-inner">
-          <button id="btn-page-public" onclick="switchPage('public')" class="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-md transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-            <span>1. Public View</span>
-          </button>
-
-          <button id="btn-page-admin" onclick="switchPage('admin')" class="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full text-zinc-400 hover:text-white transition-all">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-            <span>2. Admin Studio</span>
-          </button>
-        </div>
-
+        <button onclick="scrollToContact()" class="text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 px-4 py-1.5 rounded-full shadow-lg shadow-blue-600/30 transition">
+          Contact
+        </button>
       </div>
+    </div>
+  </nav>
+
+  <!-- SECRET ADMIN HEADER (Visible only when in #admin mode) -->
+  <header id="adminHeader" class="hidden sticky top-0 z-50 bg-amber-950/40 backdrop-blur-xl border-b border-amber-500/30 px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+        <span class="text-xs font-bold text-amber-300 uppercase tracking-wider font-mono">Private Admin Studio</span>
+        <span class="text-[11px] text-amber-400/70 hidden sm:inline">(Add / Edit Projects)</span>
+      </div>
+      <button onclick="window.location.hash='#portfolio'; checkRoute();" class="flex items-center space-x-1.5 text-xs font-semibold bg-slate-900 text-slate-200 hover:text-white px-3 py-1 rounded-full border border-slate-700 hover:border-slate-500 transition">
+        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        <span>Back to Public View</span>
+      </button>
     </div>
   </header>
 
-  <!-- ========================================================
-       PAGE 1: PUBLIC SHAREABLE PORTFOLIO (APPLE THEME)
-  ======================================================== -->
-  <section id="view-public" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
-    
-    <!-- Hero Banner -->
-    <div class="text-center max-w-4xl mx-auto space-y-6 pt-4">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span id="hero-badge">Senior iOS Developer • 4+ Years Experience</span>
+  <!-- ================= PUBLIC VIEW CONTAINER ================= -->
+  <main id="publicView" class="block max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <!-- Hero Section -->
+    <section class="text-center max-w-3xl mx-auto space-y-5 pt-6">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
+        <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+        <span>Available for High-Impact iOS & Swift Projects</span>
       </div>
-
       <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-        Building Scalable Native Apps for <br class="hidden sm:inline">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">
-          iOS, iPadOS & Apple Platforms.
+        Architecting Smooth, <br class="hidden sm:block" />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
+          Apple-Standard Experiences.
         </span>
       </h1>
-
-      <p id="hero-tagline" class="text-base sm:text-xl text-zinc-300 max-w-2xl mx-auto leading-relaxed">
-        Specializing in Swift 6, SwiftUI, Clean MVVM-C architectures, CoreML, and delivering buttery 120Hz ProMotion user interfaces with 99.85%+ crash-free reliability.
+      <p class="text-sm sm:text-base text-slate-400 leading-relaxed font-light">
+        4+ years specializing in SwiftUI, UIKit, Combine, Clean MVVM-C architectures, CoreML, and high-performance offline caching. Built and deployed scalable apps on the App Store.
       </p>
-
-      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-        <button onclick="openContactModal()" class="px-6 py-3 rounded-full text-sm font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/25 transition-all flex items-center gap-2 hover:scale-105">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          <span>Hire / Contact Hemant</span>
-        </button>
-
-        <a id="public-github-link" href="https://github.com/HemantSharma8076" target="_blank" class="px-5 py-3 rounded-full text-sm font-medium bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-zinc-200 transition-all flex items-center gap-2">
-          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>GitHub</span>
-        </a>
-
-        <a id="public-linkedin-link" href="https://linkedin.com/in/HemantSharma8076" target="_blank" class="px-5 py-3 rounded-full text-sm font-medium bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-cyan-300 transition-all flex items-center gap-2">
-          <svg class="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          <span>LinkedIn</span>
-        </a>
-      </div>
-
-      <!-- 4 High-Impact Metric Cards -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 max-w-3xl mx-auto">
-        <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.08] backdrop-blur-md">
-          <div id="stat-experience" class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 font-mono">4+ Years</div>
-          <div class="text-xs text-zinc-400 mt-1 font-medium">iOS Production Exp</div>
+      
+      <!-- Metrics -->
+      <div class="grid grid-cols-3 gap-3 pt-4 max-w-xl mx-auto">
+        <div class="apple-card p-4 rounded-2xl text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">4+</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Years iOS Exp</div>
         </div>
-        <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.08] backdrop-blur-md">
-          <div id="stat-shipped" class="text-3xl font-extrabold text-white font-mono">15+ Apps</div>
-          <div class="text-xs text-zinc-400 mt-1 font-medium">Shipped to App Store</div>
+        <div class="apple-card p-4 rounded-2xl text-center">
+          <div id="statProjectsCount" class="text-2xl sm:text-3xl font-extrabold text-blue-400 font-mono">4</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Apps Shipped</div>
         </div>
-        <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.08] backdrop-blur-md">
-          <div id="stat-downloads" class="text-3xl font-extrabold text-indigo-400 font-mono">750K+</div>
-          <div class="text-xs text-zinc-400 mt-1 font-medium">Global Downloads</div>
-        </div>
-        <div class="p-4 rounded-2xl bg-zinc-900/60 border border-white/[0.08] backdrop-blur-md">
-          <div id="stat-crashfree" class="text-3xl font-extrabold text-emerald-400 font-mono">99.85%</div>
-          <div class="text-xs text-zinc-400 mt-1 font-medium">Crash-Free Sessions</div>
+        <div class="apple-card p-4 rounded-2xl text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">99.8%</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Crash-Free Rate</div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- PROJECT SHOWCASE SECTION -->
-    <div class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/[0.08] pb-4">
+    <!-- Filter Buttons -->
+    <section class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
         <div>
-          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-2">
-            <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            <span>Featured iOS Production Apps</span>
+          <h2 class="text-xl font-bold text-white tracking-tight flex items-center space-x-2">
+            <span>Featured iOS Apps</span>
+            <span class="text-xs bg-slate-800 text-blue-400 font-mono px-2 py-0.5 rounded-full border border-slate-700" id="projectBadgeTotal">0 Apps</span>
           </h2>
-          <p class="text-sm text-zinc-400 mt-1">Native Swift architectures, App Store metrics, and live screenshots.</p>
+          <p class="text-xs text-slate-400 mt-0.5">Explore production iOS applications & technical architectures.</p>
         </div>
-
-        <!-- Filter Tags -->
-        <div id="project-filters" class="flex flex-wrap gap-1.5">
-          <!-- Dynamic Filter Buttons Injected via JS -->
+        <div class="flex items-center flex-wrap gap-1.5" id="filterContainer">
+          <button onclick="setFilter('All')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-blue-600 text-white" data-filter="All">All</button>
+          <button onclick="setFilter('SwiftUI')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="SwiftUI">SwiftUI</button>
+          <button onclick="setFilter('UIKit')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="UIKit">UIKit</button>
+          <button onclick="setFilter('CoreML')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="CoreML">CoreML</button>
         </div>
       </div>
 
       <!-- Projects Grid -->
-      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        <!-- Rendered dynamically -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered via JavaScript -->
       </div>
-    </div>
+    </section>
 
-    <!-- 4-YEAR CAREER TIMELINE -->
-    <div class="space-y-6 pt-6">
-      <div>
-        <h2 class="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-          <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          <span>4-Year Engineering Milestones</span>
-        </h2>
-        <p class="text-sm text-zinc-400 mt-1">Track record of architectural leadership and Apple platform delivery.</p>
-      </div>
-
-      <div class="relative border-l border-white/10 ml-4 sm:ml-6 space-y-8 pl-6 sm:pl-8">
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-black border-2 border-cyan-400"></div>
-          <div class="p-5 rounded-2xl bg-zinc-900/60 border border-white/[0.08] space-y-2">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="text-xs font-mono text-cyan-300 bg-cyan-950/60 px-2.5 py-0.5 rounded-full border border-cyan-500/30">2024 — Present</span>
-              <span class="text-xs text-zinc-400 font-mono">NextGen Mobility & FinTech</span>
-            </div>
-            <h4 class="text-lg font-bold text-white">Senior iOS Engineer</h4>
-            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-              Leading core architectural migration to Swift 6 Concurrency & SwiftUI. Engineered Apple Pay (PassKit) integrations, reduced app launch latency by 42%, and maintained 99.85% crash-free sessions for 300K+ monthly active users.
-            </p>
-          </div>
+    <!-- Skills Matrix -->
+    <section class="apple-card p-6 sm:p-8 rounded-3xl space-y-6">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
+          <i data-lucide="layers" class="w-4 h-4"></i>
         </div>
-
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-black border-2 border-blue-400"></div>
-          <div class="p-5 rounded-2xl bg-zinc-900/60 border border-white/[0.08] space-y-2">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="text-xs font-mono text-blue-300 bg-blue-950/60 px-2.5 py-0.5 rounded-full border border-blue-500/30">2023 — 2024</span>
-              <span class="text-xs text-zinc-400 font-mono">FitPulse Technologies</span>
-            </div>
-            <h4 class="text-lg font-bold text-white">Mid-Senior iOS Developer</h4>
-            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-              Spearheaded CoreML on-device vision pose-estimation models and watchOS HealthKit synchronization. Implemented interactive Lock Screen & Home Screen widgets via WidgetKit.
-            </p>
-          </div>
-        </div>
-
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-black border-2 border-indigo-400"></div>
-          <div class="p-5 rounded-2xl bg-zinc-900/60 border border-white/[0.08] space-y-2">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="text-xs font-mono text-indigo-300 bg-indigo-950/60 px-2.5 py-0.5 rounded-full border border-indigo-500/30">2022 — 2023</span>
-              <span class="text-xs text-zinc-400 font-mono">AppVenture Labs</span>
-            </div>
-            <h4 class="text-lg font-bold text-white">iOS Software Engineer</h4>
-            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-              Developed and shipped 8 commercial native iOS applications to the App Store with UIKit, Combine, RESTful APIs, CoreData caching, and Firebase push notifications.
-            </p>
-          </div>
+        <div>
+          <h3 class="text-lg font-bold text-white">Technical iOS Specialization</h3>
+          <p class="text-xs text-slate-400">Production-hardened skills honed across 4 years of Apple platform engineering.</p>
         </div>
       </div>
-    </div>
 
-    <!-- SKILLS MATRIX -->
-    <div class="space-y-6 pt-6">
-      <div>
-        <h2 class="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-          <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          <span>iOS Core Competencies</span>
-        </h2>
-        <p class="text-sm text-zinc-400 mt-1">Specialized engineering toolchain mastered over 4 years.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+        <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
+          <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+            <span>Swift & Architecture</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">Swift 5.10+, SwiftUI, UIKit, MVVM-C, Clean Swift, Async/Await Concurrency, Actors, Modular SPM.</p>
+        </div>
+        <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
+          <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Data & Offline First</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">SwiftData, CoreData, Realm, URLSession, Combine Reactive Streams, Keychain & Biometric Auth.</p>
+        </div>
+        <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
+          <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+            <span>Apple Ecosystem & AI</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">CoreML, VisionKit, WidgetKit, StoreKit 2 (In-App Subscriptions), PushKit, Fastlane, TestFlight CI/CD.</p>
+        </div>
       </div>
+    </section>
 
-      <div id="skills-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        <!-- Rendered dynamically -->
-      </div>
-    </div>
-
-    <!-- CTA BANNER -->
-    <div class="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-blue-950/50 via-indigo-950/40 to-cyan-950/50 border border-cyan-500/20 text-center space-y-4">
-      <h3 class="text-2xl sm:text-3xl font-bold text-white">Let’s Ship Your Next Big iOS Product</h3>
-      <p class="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto">
-        Available for full-time Senior iOS roles, high-impact contract development, and Swift architecture consulting.
+    <!-- Contact & Footer -->
+    <section id="contactSection" class="text-center py-12 border-t border-slate-800/60 space-y-4">
+      <h3 class="text-2xl font-bold text-white">Let's Build Something Exceptional</h3>
+      <p class="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto">
+        Feel free to reach out for Senior iOS roles, technical consultations, or contracting opportunities.
       </p>
-      <div class="flex flex-wrap justify-center gap-3 pt-2">
-        <button onclick="openContactModal()" class="px-6 py-2.5 rounded-full text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md hover:scale-105 transition-all">
-          Get in Touch with Hemant
-        </button>
-        <button onclick="switchPage('admin')" class="px-5 py-2.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/15 text-zinc-200 transition-all flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-          <span>Manage / Add Apps in Studio</span>
-        </button>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ========================================================
-       PAGE 2: ADMIN STUDIO (ADD/EDIT PROJECTS & BIO)
-  ======================================================== -->
-  <section id="view-admin" class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 hidden">
-    
-    <!-- Admin Studio Header Banner -->
-    <div class="p-6 rounded-3xl bg-zinc-900/70 border border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center">
-          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        </div>
-        <div>
-          <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-            <span>Admin Studio</span>
-            <span id="admin-badge" class="text-xs font-mono px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30">
-              PIN Protected
-            </span>
-          </h2>
-          <p class="text-xs sm:text-sm text-zinc-400">Add apps, upload screenshots, update metrics, and manage your iOS portfolio.</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="openHostingModal()" class="px-3.5 py-2 rounded-xl text-xs font-medium bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-500/30 text-cyan-300 flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-          <span>Share Links</span>
-        </button>
-
-        <button id="btn-lock-studio" onclick="lockStudio()" class="px-3.5 py-2 rounded-xl text-xs font-medium bg-red-950/40 hover:bg-red-900/40 border border-red-500/30 text-red-300 flex items-center gap-1.5 hidden">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-          <span>Lock</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- PIN CODE AUTH LOCK -->
-    <div id="admin-auth-card" class="p-8 sm:p-12 rounded-3xl bg-zinc-900/40 border border-white/[0.08] max-w-md mx-auto text-center space-y-6">
-      <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center mx-auto shadow-lg shadow-purple-500/20">
-        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold text-white">Enter Studio Passcode</h3>
-        <p class="text-xs text-zinc-400 mt-1">Default PIN: <strong class="text-cyan-300 font-mono">8076</strong> or <strong class="text-cyan-300 font-mono">1234</strong></p>
-      </div>
-
-      <form onsubmit="handleAdminAuth(event)" class="space-y-4">
-        <div>
-          <input type="password" id="input-pin" maxlength="6" placeholder="Enter PIN..." class="w-full px-4 py-3 rounded-xl bg-black border border-white/10 text-center font-mono text-2xl tracking-widest text-white focus:outline-none focus:border-cyan-400">
-          <p id="pin-error" class="text-xs text-red-400 mt-1.5 hidden font-medium">Incorrect PIN. Try 8076 or 1234.</p>
-        </div>
-        <button type="submit" class="w-full py-2.5 rounded-xl font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm shadow-lg shadow-purple-500/25 transition-all">
-          Unlock Admin Dashboard
-        </button>
-      </form>
-    </div>
-
-    <!-- UNLOCKED STUDIO CONTROLS -->
-    <div id="admin-dashboard-content" class="space-y-8 hidden">
-      
-      <!-- Top Action Ribbon -->
-      <div class="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-zinc-900/40 border border-white/[0.08]">
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="openNewProjectForm()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 text-white flex items-center gap-1.5 shadow-md hover:scale-105 transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-            <span>Add New iOS App</span>
-          </button>
-
-          <button onclick="toggleProfileEditor()" class="px-3.5 py-2 rounded-xl text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 flex items-center gap-1.5">
-            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-            <span>Edit Profile & Stats</span>
-          </button>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <button onclick="exportBackupJSON()" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 text-xs flex items-center gap-1">
-            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            <span class="hidden sm:inline">Export Backup</span>
-          </button>
-
-          <label class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 text-xs flex items-center gap-1 cursor-pointer">
-            <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-            <span class="hidden sm:inline">Import JSON</span>
-            <input type="file" accept=".json" onchange="importBackupJSON(event)" class="hidden">
-          </label>
-
-          <button onclick="resetDefaults()" class="p-2 rounded-xl bg-white/5 hover:bg-red-500/20 border border-white/10 text-zinc-400 hover:text-red-400 text-xs" title="Reset to Defaults">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- PROFILE & STATS FORM (COLLAPSIBLE) -->
-      <div id="profile-editor-card" class="p-6 rounded-3xl bg-zinc-900/80 border border-purple-500/30 space-y-4 hidden">
-        <div class="flex items-center justify-between">
-          <h3 class="text-base font-bold text-white flex items-center gap-2">
-            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-            <span>Edit Profile & Hero Numbers</span>
-          </h3>
-          <button onclick="toggleProfileEditor()" class="text-zinc-400 hover:text-white">&times;</button>
-        </div>
-
-        <form onsubmit="handleSaveProfile(event)" class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Full Name</label>
-              <input id="edit-profile-name" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Hero Badge</label>
-              <input id="edit-profile-badge" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">PIN Passcode</label>
-              <input id="edit-profile-pin" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-cyan-300 font-mono">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Exp Label</label>
-              <input id="edit-profile-exp" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Apps Shipped</label>
-              <input id="edit-profile-shipped" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Downloads</label>
-              <input id="edit-profile-downloads" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Crash-Free %</label>
-              <input id="edit-profile-crashfree" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-          </div>
-
-          <div>
-            <label class="text-[11px] font-mono text-zinc-400">Tagline / Bio</label>
-            <textarea id="edit-profile-tagline" rows="2" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white"></textarea>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Email</label>
-              <input id="edit-profile-email" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">GitHub Link</label>
-              <input id="edit-profile-github" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">LinkedIn Link</label>
-              <input id="edit-profile-linkedin" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-          </div>
-
-          <button type="submit" class="px-5 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-            Save Profile Updates
-          </button>
-        </form>
-      </div>
-
-      <!-- ADD / EDIT PROJECT FORM -->
-      <div id="project-form-card" class="p-6 sm:p-8 rounded-3xl bg-zinc-900/80 border border-cyan-500/30 space-y-5 hidden">
-        <div class="flex items-center justify-between">
-          <h3 id="form-heading" class="text-xl font-bold text-white flex items-center gap-2">
-            <svg class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            <span>Add New iOS App</span>
-          </h3>
-          <button onclick="closeProjectForm()" class="p-1 rounded-lg text-zinc-400 hover:text-white">&times;</button>
-        </div>
-
-        <form onsubmit="handleSaveProject(event)" class="space-y-4">
-          <input type="hidden" id="form-proj-id">
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">App Name *</label>
-              <input id="form-proj-title" required placeholder="e.g. AuraPay NeoBank" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Category *</label>
-              <input id="form-proj-category" required placeholder="SwiftUI, CoreML, UIKit" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">App Status</label>
-              <input id="form-proj-status" placeholder="Live on App Store" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-          </div>
-
-          <div>
-            <label class="text-[11px] font-mono text-zinc-400">Subtitle / Headline *</label>
-            <input id="form-proj-subtitle" required placeholder="Real-time FaceID Payments & Apple Wallet" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-          </div>
-
-          <div>
-            <label class="text-[11px] font-mono text-zinc-400">Detailed iOS Description *</label>
-            <textarea id="form-proj-description" rows="3" required placeholder="Architectural pattern (MVVM-C, TCA), Swift concurrency, performance metrics, Combine streams..." class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white"></textarea>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Architecture Pattern</label>
-              <input id="form-proj-arch" placeholder="Clean Architecture (MVVM-C)" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">Impact / Review Metrics</label>
-              <input id="form-proj-impact" placeholder="4.9 ★ • 250K+ Monthly Users" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-          </div>
-
-          <div>
-            <label class="text-[11px] font-mono text-zinc-400">Tech Stack Tags (Comma separated)</label>
-            <input id="form-proj-tags" placeholder="SwiftUI, Combine, PassKit, LocalAuthentication" class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white font-mono">
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">App Store URL (Optional)</label>
-              <input id="form-proj-appstore" placeholder="https://apps.apple.com/..." class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-            <div>
-              <label class="text-[11px] font-mono text-zinc-400">GitHub Repo URL (Optional)</label>
-              <input id="form-proj-github" placeholder="https://github.com/HemantSharma8076/..." class="w-full mt-1 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs text-white">
-            </div>
-          </div>
-
-          <!-- Screenshot URL or Upload -->
-          <div class="p-4 rounded-2xl bg-black/50 border border-white/10 space-y-3">
-            <label class="text-[11px] font-mono text-cyan-300">App Screenshot / Mockup</label>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <input id="form-proj-imgurl" placeholder="Direct image URL (https://...)" class="w-full px-3 py-2 rounded-xl bg-zinc-900 border border-white/10 text-xs text-white">
-              
-              <label class="w-full py-2 px-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs text-zinc-200 border border-white/10 flex items-center justify-center gap-2 cursor-pointer">
-                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                <span>Upload Screenshot from Phone / PC</span>
-                <input type="file" accept="image/*" onchange="handleImageFileSelect(event)" class="hidden">
-              </label>
-            </div>
-
-            <!-- Preview thumbnail -->
-            <div id="image-preview-box" class="flex items-center gap-3 pt-1 hidden">
-              <img id="image-preview-thumb" src="" alt="preview" class="w-16 h-16 rounded-xl object-cover border border-cyan-400/40">
-              <span class="text-[11px] text-zinc-400 font-mono">Image loaded and ready</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2 pt-2">
-            <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md hover:scale-105 transition-all">
-              Save & Publish App
-            </button>
-            <button type="button" onclick="closeProjectForm()" class="px-4 py-2.5 rounded-xl text-xs font-medium bg-white/5 hover:bg-white/10 text-zinc-400">
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <!-- ACTIVE APPS LIST IN ADMIN -->
-      <div class="space-y-4">
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-          <span>Your Active iOS Projects (<span id="admin-proj-count">0</span>)</span>
-        </h3>
-
-        <div id="admin-projects-list" class="space-y-3">
-          <!-- Rendered dynamically -->
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- ========================================================
-       MODAL 1: PERMANENT FREE HOSTING & 2-LINKS EXPLAINER
-  ======================================================== -->
-  <div id="modal-hosting" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden">
-    <div class="relative w-full max-w-lg bg-[#121214] border border-cyan-500/30 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-      <button onclick="closeHostingModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">&times;</button>
-
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-        </div>
-        <div>
-          <h3 class="text-xl font-bold text-white">Why URLs Expire & How to Make it Permanent</h3>
-          <p class="text-xs text-zinc-400">Free, fast 2-minute setup for HemantSharma8076</p>
-        </div>
-      </div>
-
-      <!-- Problem Explanation -->
-      <div class="p-3.5 rounded-2xl bg-amber-950/30 border border-amber-500/30 text-amber-200 text-xs space-y-1">
-        <div class="font-bold flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-          <span>404 URL Kyu Aaya Tha?</span>
-        </div>
-        <p class="text-[11px] leading-relaxed">
-          Jo link aapne browser me dekha (`/a76de8...`), wo is preview tool ka temporary sandbox token tha jo browser reload karne par expire ho jata hai.
-        </p>
-      </div>
-
-      <!-- 2-Minute Permanent Solution -->
-      <div class="space-y-3">
-        <h4 class="text-xs font-mono uppercase text-cyan-400 tracking-wider">Aapka Permanent Free Link Kaise Banega (2 Min):</h4>
-        
-        <div class="p-3.5 rounded-2xl bg-black border border-white/10 space-y-2 text-xs text-zinc-300">
-          <div class="font-bold text-white flex items-center gap-1.5">
-            <span class="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px]">1</span>
-            <span>GitHub Pages (Recommended & 100% Free)</span>
-          </div>
-          <p class="text-[11px] text-zinc-400 pl-6 leading-relaxed">
-            1. GitHub par jaakar naya repository banaye: <strong class="text-cyan-300 font-mono">HemantSharma8076.github.io</strong><br>
-            2. Ye <strong class="text-white">index.html</strong> file wahan upload kar dijiye.<br>
-            3. Aapka permanent shareable URL ban jayega:
-          </p>
-          <div class="pl-6 flex items-center gap-2">
-            <input readonly value="https://HemantSharma8076.github.io" class="w-full px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-white/10 text-xs font-mono text-cyan-300 select-all">
-            <button onclick="copyToClipboard('https://HemantSharma8076.github.io')" class="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-bold">Copy</button>
-          </div>
-        </div>
-
-        <div class="p-3.5 rounded-2xl bg-black border border-white/10 space-y-2 text-xs text-zinc-300">
-          <div class="font-bold text-white flex items-center gap-1.5">
-            <span class="w-5 h-5 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px]">2</span>
-            <span>Vercel Drop (30 Seconds Instant)</span>
-          </div>
-          <p class="text-[11px] text-zinc-400 pl-6 leading-relaxed">
-            <strong class="text-white">vercel.com</strong> par sign in karein aur ye file drag and drop karein. Aapko permanent link mil jayega: <strong class="text-cyan-300 font-mono">hemant-ios.vercel.app</strong>.
-          </p>
-        </div>
-      </div>
-
-      <div class="pt-2 text-center">
-        <button onclick="closeHostingModal()" class="px-6 py-2 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 text-white">
-          Got It, Close
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========================================================
-       MODAL 2: PROJECT DETAIL INSPECTOR
-  ======================================================== -->
-  <div id="modal-project-detail" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden">
-    <div class="relative w-full max-w-2xl bg-[#121214] border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl overflow-y-auto max-h-[90vh]">
-      <button onclick="closeProjectModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">&times;</button>
-
-      <div class="space-y-1">
-        <div class="flex items-center gap-2">
-          <span id="modal-cat" class="text-xs font-mono text-cyan-300 bg-cyan-950/60 px-2.5 py-0.5 rounded-full border border-cyan-500/20">SwiftUI</span>
-          <span id="modal-status" class="text-xs font-mono text-emerald-400">Live on App Store</span>
-        </div>
-        <h3 id="modal-title" class="text-2xl font-bold text-white pt-1">App Title</h3>
-        <p id="modal-subtitle" class="text-sm text-zinc-400">App Subtitle</p>
-      </div>
-
-      <img id="modal-img" src="" alt="App" class="w-full h-64 object-cover rounded-2xl border border-white/10">
-
-      <div class="space-y-2">
-        <h4 class="text-xs font-mono uppercase tracking-wider text-cyan-400">iOS Architecture & Systems</h4>
-        <p id="modal-desc" class="text-xs sm:text-sm text-zinc-300 leading-relaxed"></p>
-      </div>
-
-      <div class="p-4 rounded-xl bg-zinc-900 border border-white/10 space-y-1">
-        <div class="text-[11px] font-mono text-zinc-400">Pattern:</div>
-        <div id="modal-arch" class="text-xs sm:text-sm font-bold text-white font-mono"></div>
-        <div id="modal-impact" class="text-xs text-emerald-400 font-mono pt-1"></div>
-      </div>
-
-      <div>
-        <div class="text-[11px] font-mono text-zinc-400 mb-1.5">Frameworks:</div>
-        <div id="modal-tags" class="flex flex-wrap gap-1.5"></div>
-      </div>
-
-      <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
-        <a id="modal-btn-github" href="#" target="_blank" class="px-4 py-2 rounded-xl text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-200 flex items-center gap-1.5">
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <a href="mailto:hemantsharma8076@gmail.com" class="px-5 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-lg shadow-blue-500/25 transition flex items-center space-x-2">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+          <span>Email Hemant</span>
+        </a>
+        <a href="https://github.com/hemantsharmap8076" target="_blank" class="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-medium transition flex items-center space-x-2">
+          <i data-lucide="github" class="w-3.5 h-3.5"></i>
           <span>GitHub</span>
         </a>
-        <a id="modal-btn-appstore" href="#" target="_blank" class="px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 text-white flex items-center gap-1.5 shadow-md">
-          <span>App Store</span>
-        </a>
       </div>
-    </div>
-  </div>
+      <p class="text-[11px] text-slate-600 pt-6">© 2026 Hemant Sharma • Designed with Cupertino Dark Standards</p>
+    </section>
+  </main>
 
-  <!-- ========================================================
-       MODAL 3: CONTACT & HIRE ME
-  ======================================================== -->
-  <div id="modal-contact" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl hidden">
-    <div class="relative w-full max-w-md bg-[#121214] border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-      <button onclick="closeContactModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-white text-xl">&times;</button>
-
-      <div class="text-center space-y-1">
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center mx-auto mb-3 shadow-lg shadow-cyan-500/20">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        </div>
-        <h3 class="text-2xl font-bold text-white">Let’s Connect</h3>
-        <p class="text-xs text-zinc-400">Available for Senior iOS positions and consulting.</p>
+  <!-- ================= ADMIN STUDIO (PIN PROTECTED) ================= -->
+  <section id="adminView" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-8">
+    <!-- Login Pin Lock Card (if locked) -->
+    <div id="pinLockModal" class="apple-card max-w-md mx-auto p-8 rounded-3xl text-center space-y-4">
+      <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center mx-auto text-xl">
+        <i data-lucide="lock" class="w-6 h-6"></i>
       </div>
-
-      <div class="space-y-3">
-        <div class="p-3.5 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-between">
-          <div>
-            <div class="text-[10px] font-mono text-zinc-400">Email</div>
-            <div id="contact-modal-email" class="text-xs font-medium text-white">hemantsharma8076@gmail.com</div>
-          </div>
-          <button onclick="copyToClipboard(currentProfile.email)" class="px-3 py-1 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 text-cyan-300">
-            Copy
-          </button>
-        </div>
-
-        <div class="p-3.5 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-between">
-          <div>
-            <div class="text-[10px] font-mono text-zinc-400">LinkedIn</div>
-            <div class="text-xs font-medium text-white">in/HemantSharma8076</div>
-          </div>
-          <a id="contact-modal-linkedin" href="https://linkedin.com/in/HemantSharma8076" target="_blank" class="px-3 py-1 rounded-lg text-xs font-medium bg-blue-600/20 text-cyan-300">
-            Visit
-          </a>
-        </div>
-
-        <div class="p-3.5 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-between">
-          <div>
-            <div class="text-[10px] font-mono text-zinc-400">GitHub</div>
-            <div class="text-xs font-medium text-white">github.com/HemantSharma8076</div>
-          </div>
-          <a id="contact-modal-github" href="https://github.com/HemantSharma8076" target="_blank" class="px-3 py-1 rounded-lg text-xs font-medium bg-white/5 text-zinc-300">
-            Visit
-          </a>
-        </div>
+      <h2 class="text-xl font-bold text-white">Admin Studio Login</h2>
+      <p class="text-xs text-slate-400">Enter your secure 4-digit PIN to manage projects.</p>
+      <div class="flex justify-center pt-2">
+        <input id="adminPinInput" type="password" maxlength="6" placeholder="PIN (8076)" class="w-40 text-center tracking-widest text-lg font-mono bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-amber-400">
       </div>
-
-      <a id="btn-email-direct" href="mailto:hemantsharma8076@gmail.com?subject=Senior%20iOS%20Opportunity" class="w-full py-3 rounded-2xl font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs text-center block shadow-lg shadow-cyan-500/25">
-        Send Email Directly
-      </a>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="mt-auto border-t border-white/[0.08] bg-black py-8 text-xs text-zinc-500">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-        <span class="text-zinc-400 font-mono">Designed for Hemant Sharma (@HemantSharma8076) • 4 YOE</span>
-      </div>
-      <div class="flex items-center gap-4 text-xs font-mono">
-        <button onclick="switchPage('public')" class="hover:text-cyan-400">1. Public View</button>
-        <span>•</span>
-        <button onclick="switchPage('admin')" class="hover:text-purple-400">2. Admin Studio (PIN 8076)</button>
-        <span>•</span>
-        <button onclick="openHostingModal()" class="hover:text-white">Permanent Live URL Guide</button>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ========================================================
-       DATA & APPLICATION JAVASCRIPT
-  ======================================================== -->
-  <script>
-    // PRESET PRODUCTION DATA
-    const INITIAL_PROFILE = {
-      name: 'Hemant Sharma',
-      handle: 'HemantSharma8076',
-      badge: 'Senior iOS Engineer • 4+ Years Experience',
-      tagline: 'Architecting high-performance native iOS applications with Swift, SwiftUI, and ultra-fluid 120Hz ProMotion UX.',
-      yearsExperience: '4+ Years',
-      appsShipped: '15+ Apps',
-      appDownloads: '750K+',
-      crashFreeRate: '99.85%',
-      email: 'hemantsharma8076@gmail.com',
-      github: 'https://github.com/HemantSharma8076',
-      linkedin: 'https://linkedin.com/in/HemantSharma8076',
-      pin: '8076'
-    };
-
-    const INITIAL_PROJECTS = [
-      {
-        id: 'proj-1',
-        title: 'AuraPay — NeoBank & Apple Wallet',
-        category: 'SwiftUI',
-        subtitle: 'FinTech Banking & Real-Time Biometric Payments',
-        description: 'Next-generation digital banking app engineered with SwiftUI, Combine, and FaceID / Biometric authentication. Integrates PassKit for instantaneous Apple Wallet card provisioning, interactive 3D card physics, and offline transaction ledger syncing.',
-        architecture: 'Clean Architecture (MVVM-C) + Modular SPM',
-        tags: ['SwiftUI', 'Combine', 'PassKit', 'LocalAuthentication', 'WidgetKit'],
-        impact: '4.9 ★ (15K+ reviews) • 250K+ Monthly Active Users',
-        appStoreUrl: 'https://apps.apple.com',
-        githubUrl: 'https://github.com/HemantSharma8076',
-        screenshotUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=700&q=80',
-        status: 'Live on App Store'
-      },
-      {
-        id: 'proj-2',
-        title: 'PulseFit Pro — AI Workout Coach',
-        category: 'CoreML',
-        subtitle: '60FPS Real-Time Vision Pose Tracking & HealthKit',
-        description: 'High-performance fitness application utilizing CoreML & Vision framework for zero-latency camera rep counting, posture correction, and biomechanical feedback. Syncs bi-directionally with Apple Watch and logs workouts directly to HealthKit.',
-        architecture: 'The Composable Architecture (TCA)',
-        tags: ['CoreML', 'Vision', 'HealthKit', 'watchOS', 'Swift Concurrency'],
-        impact: 'Featured App on App Store • 99.9% Crash-Free Sessions',
-        appStoreUrl: 'https://apps.apple.com',
-        githubUrl: 'https://github.com/HemantSharma8076',
-        screenshotUrl: 'https://images.unsplash.com/photo-1510519138161-58474ebf8804?auto=format&fit=crop&w=700&q=80',
-        status: 'Live on App Store'
-      },
-      {
-        id: 'proj-3',
-        title: 'UrbanCart — High-Volume E-Commerce',
-        category: 'UIKit',
-        subtitle: 'Fluid 120Hz ProMotion Catalog & StoreKit 2',
-        description: 'Enterprise shopping client engineered with optimized UICollectionView compositions, dynamic diffable data sources, and custom Metal blur shaders. Implements StoreKit 2 seamless VIP memberships and deep universal link routing.',
-        architecture: 'VIPER + Repository Pattern',
-        tags: ['UIKit', 'StoreKit 2', 'Combine', 'CoreData', 'Metal Shaders'],
-        impact: '$3.2M+ In-App Sales processed • 400K+ Downloads',
-        appStoreUrl: 'https://apps.apple.com',
-        githubUrl: 'https://github.com/HemantSharma8076',
-        screenshotUrl: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=700&q=80',
-        status: 'Live on App Store'
-      },
-      {
-        id: 'proj-4',
-        title: 'SwiftMesh — Offline P2P Mesh Network',
-        category: 'Open Source',
-        subtitle: 'Decentralized Zero-Internet Encrypted Communication',
-        description: 'Open-source Swift Package (SPM) providing ad-hoc offline peer discovery and mesh packet relay using MultipeerConnectivity, CoreBluetooth peripheral advertising, and Apple CryptoKit end-to-end encryption.',
-        architecture: 'Modular Swift Package (SPM)',
-        tags: ['MultipeerConnectivity', 'CoreBluetooth', 'CryptoKit', 'SPM', 'XCTest'],
-        impact: '1.2K+ GitHub Stars • Used in 25+ Commercial iOS Apps',
-        appStoreUrl: '',
-        githubUrl: 'https://github.com/HemantSharma8076',
-        screenshotUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=700&q=80',
-        status: 'Open Source'
-      }
-    ];
-
-    const SKILLS_LIST = [
-      'Swift 6 & Modern Concurrency (async/await, Actors, Sendable)',
-      'SwiftUI, Combine & Modern UIKit Interoperability',
-      'Clean Architecture (MVVM-Coordinator & TCA)',
-      'CoreData, Realm & SwiftData Persistence',
-      'CoreML, Vision Framework & On-Device AI Models',
-      'StoreKit 2 (Subscriptions & In-App Purchases)',
-      'PassKit (Apple Pay), HealthKit & WidgetKit',
-      'Unit/UI Testing (XCTest), Instruments & Memory Profiling',
-      'CI/CD Automation (Fastlane, GitHub Actions, Xcode Cloud)'
-    ];
-
-    // STATE MANAGEMENT (PERSISTED IN LOCALSTORAGE)
-    let currentProfile = INITIAL_PROFILE;
-    let currentProjects = INITIAL_PROJECTS;
-    let selectedCategory = 'All';
-    let isAdminUnlocked = false;
-    let currentImageBase64 = '';
-
-    function loadState() {
-      try {
-        const p = localStorage.getItem('hemant_profile');
-        if (p) currentProfile = JSON.parse(p);
-      } catch (e) {}
-
-      try {
-        const pr = localStorage.getItem('hemant_projects');
-        if (pr) currentProjects = JSON.parse(pr);
-      } catch (e) {}
-    }
-
-    function saveState() {
-      try {
-        localStorage.setItem('hemant_profile', JSON.stringify(currentProfile));
-        localStorage.setItem('hemant_projects', JSON.stringify(currentProjects));
-      } catch (e) {}
-    }
-
-    // TOAST HELPER
-    function showToast(text) {
-      const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toast-text');
-      toastText.textContent = text;
-      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
-      toast.classList.add('opacity-100', 'translate-y-0');
-      setTimeout(() => {
-        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-10px]');
-        toast.classList.remove('opacity-100', 'translate-y-0');
-      }, 2800);
-    }
-
-    // SAFE CLIPBOARD COPIER (NO IFRAME ERRORS)
-    function copyToClipboard(text) {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        document.execCommand('copy');
-        showToast('Copied: ' + text);
-      } catch (err) {
-        showToast('Please copy manually: ' + text);
-      }
-      document.body.removeChild(ta);
-    }
-
-    // PAGE SWITCHER (ZERO REDIRECT, ZERO 404s)
-    function switchPage(page) {
-      const viewPublic = document.getElementById('view-public');
-      const viewAdmin = document.getElementById('view-admin');
-      const btnPublic = document.getElementById('btn-page-public');
-      const btnAdmin = document.getElementById('btn-page-admin');
-
-      if (page === 'public') {
-        viewPublic.classList.remove('hidden');
-        viewAdmin.classList.add('hidden');
-        btnPublic.className = 'flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-md transition-all';
-        btnAdmin.className = 'flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full text-zinc-400 hover:text-white transition-all';
-      } else {
-        viewPublic.classList.add('hidden');
-        viewAdmin.classList.remove('hidden');
-        btnAdmin.className = 'flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md transition-all';
-        btnPublic.className = 'flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full text-zinc-400 hover:text-white transition-all';
-        renderAdminProjects();
-      }
-    }
-
-    // RENDER FUNCTIONS
-    function renderProfile() {
-      document.getElementById('header-name').textContent = currentProfile.name;
-      document.getElementById('hero-badge').textContent = currentProfile.badge;
-      document.getElementById('hero-tagline').textContent = currentProfile.tagline;
-      document.getElementById('stat-experience').textContent = currentProfile.yearsExperience;
-      document.getElementById('stat-shipped').textContent = currentProfile.appsShipped;
-      document.getElementById('stat-downloads').textContent = currentProfile.appDownloads;
-      document.getElementById('stat-crashfree').textContent = currentProfile.crashFreeRate;
-
-      document.getElementById('public-github-link').href = currentProfile.github;
-      document.getElementById('public-linkedin-link').href = currentProfile.linkedin;
-      document.getElementById('contact-modal-email').textContent = currentProfile.email;
-      document.getElementById('contact-modal-github').href = currentProfile.github;
-      document.getElementById('contact-modal-linkedin').href = currentProfile.linkedin;
-      document.getElementById('btn-email-direct').href = `mailto:${currentProfile.email}?subject=Senior%20iOS%20Opportunity`;
-
-      // Fill edit inputs
-      document.getElementById('edit-profile-name').value = currentProfile.name;
-      document.getElementById('edit-profile-badge').value = currentProfile.badge;
-      document.getElementById('edit-profile-pin').value = currentProfile.pin || '8076';
-      document.getElementById('edit-profile-exp').value = currentProfile.yearsExperience;
-      document.getElementById('edit-profile-shipped').value = currentProfile.appsShipped;
-      document.getElementById('edit-profile-downloads').value = currentProfile.appDownloads;
-      document.getElementById('edit-profile-crashfree').value = currentProfile.crashFreeRate;
-      document.getElementById('edit-profile-tagline').value = currentProfile.tagline;
-      document.getElementById('edit-profile-email').value = currentProfile.email;
-      document.getElementById('edit-profile-github').value = currentProfile.github;
-      document.getElementById('edit-profile-linkedin').value = currentProfile.linkedin;
-    }
-
-    function renderFilters() {
-      const cats = ['All', ...new Set(currentProjects.map(p => p.category))];
-      const container = document.getElementById('project-filters');
-      container.innerHTML = cats.map(cat => `
-        <button onclick="setFilter('${cat}')" class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-          selectedCategory === cat 
-            ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-sm' 
-            : 'bg-zinc-900 text-zinc-400 hover:text-white border border-white/5'
-        }">
-          ${cat}
+      <div class="flex items-center justify-center gap-2 pt-2">
+        <button onclick="verifyAdminPin()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2 rounded-xl text-xs transition">
+          Unlock Studio
         </button>
-      `).join('');
+        <button onclick="window.location.hash='#portfolio'; checkRoute();" class="text-xs text-slate-400 hover:text-white px-3 py-2">
+          Cancel
+        </button>
+      </div>
+      <p id="pinError" class="text-red-400 text-xs hidden">Incorrect PIN. Try 8076 or 1234.</p>
+    </div>
+
+    <!-- Authenticated Admin Content -->
+    <div id="adminContent" class="hidden space-y-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+        <div>
+          <h2 class="text-lg font-bold text-white">Project Management Studio</h2>
+          <p class="text-xs text-slate-400">Add, edit or delete iOS apps. All changes automatically update your portfolio.</p>
+        </div>
+        <button onclick="openProjectModal()" class="flex items-center space-x-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-lg shadow-blue-500/30 transition">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>+ Add New iOS App</span>
+        </button>
+      </div>
+
+      <!-- Current Projects Table -->
+      <div class="apple-card rounded-2xl overflow-hidden">
+        <div class="p-4 border-b border-slate-800 font-semibold text-sm text-slate-200">
+          Current Apps (<span id="adminProjectCount">0</span>)
+        </div>
+        <div class="divide-y divide-slate-800/80" id="adminProjectsList">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD / EDIT PROJECT MODAL -->
+  <div id="projectModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="apple-card w-full max-w-lg p-6 rounded-3xl space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 id="modalTitle" class="text-base font-bold text-white">Add New iOS App</h3>
+        <button onclick="closeProjectModal()" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="projectForm" onsubmit="saveProject(event)" class="space-y-3.5 text-xs">
+        <input type="hidden" id="formProjectId">
+
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">App Title *</label>
+          <input id="formTitle" required placeholder="e.g. HealthTrack AI" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-medium text-slate-300 mb-1">Tag / Tech Stack *</label>
+            <select id="formCategory" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+              <option value="SwiftUI">SwiftUI</option>
+              <option value="UIKit">UIKit</option>
+              <option value="CoreML">CoreML</option>
+              <option value="Combine">Combine</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-medium text-slate-300 mb-1">Role / Impact Metric</label>
+            <input id="formImpact" placeholder="e.g. 50k+ Active Users" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Description *</label>
+          <textarea id="formDesc" rows="3" required placeholder="Details about architecture, features, and performance..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500"></textarea>
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Tech Badges (Comma-separated)</label>
+          <input id="formTech" placeholder="SwiftUI, CoreData, StoreKit, Clean MVVM" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">App Store / Web URL</label>
+          <input id="formAppStore" type="url" placeholder="https://apps.apple.com/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">GitHub / Code URL</label>
+          <input id="formGithub" type="url" placeholder="https://github.com/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Screenshot (Image URL or Upload)</label>
+          <input id="formImage" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500 mb-2">
+          <input type="file" id="formImageFile" accept="image/*" class="text-[11px] text-slate-400 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[11px] file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500">
+        </div>
+
+        <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+          <button type="button" onclick="closeProjectModal()" class="px-4 py-2 rounded-xl text-slate-400 hover:text-white">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-lg shadow-blue-500/30 transition">Save App</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-slate-700 text-white text-xs px-4 py-2.5 rounded-2xl shadow-2xl flex items-center space-x-2 transition-all transform translate-y-20 opacity-0 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toastMsg">Action successful</span>
+  </div>
+
+  <script>
+    // Initial Seed Projects
+    const defaultProjects = [
+      {
+        id: '1',
+        title: 'PulseFit - Workout Tracker',
+        category: 'SwiftUI',
+        impact: '4.8★ App Store (12K+ MAU)',
+        desc: 'Comprehensive workout tracking engine with real-time biometric charts, offline CoreData syncing, and Apple Watch widget integration.',
+        tech: ['SwiftUI', 'HealthKit', 'SwiftData', 'WatchOS'],
+        appStore: 'https://apple.com',
+        github: 'https://github.com/hemantsharmap8076',
+        image: 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=600&auto=format&fit=crop&q=80'
+      },
+      {
+        id: '2',
+        title: 'CogniScan - Document AI',
+        category: 'CoreML',
+        impact: '99.4% OCR Accuracy',
+        desc: 'On-device neural network scanner using VisionKit & custom CoreML models for edge-based text extraction and PDF creation.',
+        tech: ['CoreML', 'VisionKit', 'Combine', 'PDFKit'],
+        appStore: 'https://apple.com',
+        github: 'https://github.com/hemantsharmap8076',
+        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80'
+      },
+      {
+        id: '3',
+        title: 'ZenVault - Crypto & Fiat Wallet',
+        category: 'UIKit',
+        impact: '$2.4M Volume Protected',
+        desc: 'High-security banking interface with custom Keychain encryption, FaceID authentication, and reactive Websockets ticker updates.',
+        tech: ['UIKit', 'Keychain', 'MVVM-C', 'WebSockets'],
+        appStore: 'https://apple.com',
+        github: 'https://github.com/hemantsharmap8076',
+        image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&auto=format&fit=crop&q=80'
+      },
+      {
+        id: '4',
+        title: 'AuraPlayer - Spatial Audio App',
+        category: 'SwiftUI',
+        impact: 'Featured on AppStore',
+        desc: 'Custom AVFoundation pipeline supporting lossless audio playback, dynamic waveform scrubbing, and lockscreen dynamic island widgets.',
+        tech: ['AVFoundation', 'ActivityKit', 'SwiftUI', 'StoreKit 2'],
+        appStore: 'https://apple.com',
+        github: 'https://github.com/hemantsharmap8076',
+        image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80'
+      }
+    ];
+
+    let projects = JSON.parse(localStorage.getItem('hemant_ios_projects')) || defaultProjects;
+    let activeFilter = 'All';
+    let isAdminAuthenticated = false;
+
+    // Toast
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
     }
 
-    function setFilter(cat) {
-      selectedCategory = cat;
-      renderFilters();
+    // Share Link
+    function copyCurrentShareLink() {
+      const url = window.location.origin + window.location.pathname + '#portfolio';
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Portfolio link copied to clipboard!');
+      }).catch(() => {
+        showToast('Copied: ' + url);
+      });
+    }
+
+    function scrollToContact() {
+      document.getElementById('contactSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Router
+    function checkRoute() {
+      const hash = window.location.hash || '#portfolio';
+      const isParamAdmin = window.location.search.includes('admin');
+      
+      const publicNavbar = document.getElementById('publicNavbar');
+      const adminHeader = document.getElementById('adminHeader');
+      const publicView = document.getElementById('publicView');
+      const adminView = document.getElementById('adminView');
+
+      if (hash === '#admin' || isParamAdmin) {
+        // Show Admin Mode Only
+        publicNavbar.classList.add('hidden');
+        publicView.classList.add('hidden');
+        adminHeader.classList.remove('hidden');
+        adminView.classList.remove('hidden');
+
+        if (!isAdminAuthenticated) {
+          document.getElementById('pinLockModal').classList.remove('hidden');
+          document.getElementById('adminContent').classList.add('hidden');
+          setTimeout(() => document.getElementById('adminPinInput')?.focus(), 200);
+        } else {
+          document.getElementById('pinLockModal').classList.add('hidden');
+          document.getElementById('adminContent').classList.remove('hidden');
+          renderAdminProjects();
+        }
+      } else {
+        // Show Clean Public View
+        publicNavbar.classList.remove('hidden');
+        publicView.classList.remove('hidden');
+        adminHeader.classList.add('hidden');
+        adminView.classList.add('hidden');
+        renderPublicProjects();
+      }
+      lucide.createIcons();
+    }
+
+    // Admin PIN Verification
+    function verifyAdminPin() {
+      const pin = document.getElementById('adminPinInput').value;
+      if (pin === '8076' || pin === '1234') {
+        isAdminAuthenticated = true;
+        document.getElementById('pinError').classList.add('hidden');
+        document.getElementById('pinLockModal').classList.add('hidden');
+        document.getElementById('adminContent').classList.remove('hidden');
+        renderAdminProjects();
+        showToast('Admin Studio Unlocked');
+      } else {
+        document.getElementById('pinError').classList.remove('hidden');
+      }
+    }
+
+    // Filter
+    function setFilter(filter) {
+      activeFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === filter) {
+          btn.className = 'filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-blue-600 text-white';
+        } else {
+          btn.className = 'filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800';
+        }
+      });
       renderPublicProjects();
     }
 
+    // Render Public Grid
     function renderPublicProjects() {
-      const grid = document.getElementById('projects-grid');
-      const filtered = selectedCategory === 'All' 
-        ? currentProjects 
-        : currentProjects.filter(p => p.category === selectedCategory);
+      const grid = document.getElementById('projectsGrid');
+      const filtered = activeFilter === 'All' 
+        ? projects 
+        : projects.filter(p => (p.category || '').toLowerCase() === activeFilter.toLowerCase());
+
+      document.getElementById('statProjectsCount').innerText = projects.length;
+      document.getElementById('projectBadgeTotal').innerText = `${projects.length} Apps`;
 
       if (filtered.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full text-center py-12 border border-dashed border-white/10 rounded-3xl">
-            <p class="text-zinc-500 text-sm">No apps in this category yet.</p>
+          <div class="col-span-full py-16 text-center text-slate-500">
+            <i data-lucide="folder-x" class="w-10 h-10 mx-auto stroke-1 mb-2"></i>
+            <p class="text-sm">No apps found under this filter.</p>
           </div>
         `;
+        lucide.createIcons();
         return;
       }
 
-      grid.innerHTML = filtered.map(p => `
-        <div class="group relative rounded-3xl bg-zinc-900/60 hover:bg-zinc-900/90 border border-white/[0.08] hover:border-cyan-500/40 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl">
-          <div class="p-6 sm:p-7 space-y-4">
-            
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-blue-500/10 text-cyan-300 border border-blue-500/20">
-                ${p.category}
-              </span>
-              <div class="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span>${p.status || 'Live on App Store'}</span>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-300 transition-colors">${p.title}</h3>
-              <p class="text-xs sm:text-sm text-zinc-400 mt-1">${p.subtitle}</p>
-            </div>
-
-            <!-- iPhone Screen Mockup -->
-            <div onclick="openProjectModal('${p.id}')" class="relative my-3 rounded-2xl overflow-hidden bg-black border border-white/10 group-hover:border-cyan-500/30 transition-all cursor-pointer">
-              <div class="notch"></div>
-              <img src="${p.screenshotUrl}" alt="${p.title}" class="w-full h-52 sm:h-56 object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-102 transition-all duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-zinc-300 bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10">
-                <span class="font-mono text-cyan-300">${p.architecture || 'Clean MVVM-C'}</span>
-                <span class="text-zinc-400">Inspect Architecture &rarr;</span>
-              </div>
-            </div>
-
-            <p class="text-xs sm:text-sm text-zinc-300 line-clamp-2 leading-relaxed">${p.description}</p>
-
-            ${p.impact ? `
-              <div class="px-3 py-1.5 rounded-xl bg-cyan-950/40 border border-cyan-500/20 text-cyan-300 text-xs font-mono">
-                ⚡ ${p.impact}
-              </div>
-            ` : ''}
-
-            <div class="flex flex-wrap gap-1.5 pt-1">
-              ${(p.tags || []).map(t => `
-                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/[0.04] text-zinc-300 border border-white/[0.08]">${t}</span>
-              `).join('')}
-            </div>
+      grid.innerHTML = filtered.map(app => `
+        <div class="apple-card rounded-3xl overflow-hidden flex flex-col group">
+          <div class="h-48 w-full bg-slate-950 relative overflow-hidden">
+            <img src="${app.image || 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=600'}" 
+                 alt="${app.title}" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100">
+            <span class="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-[11px] font-mono text-blue-400 px-2.5 py-0.5 rounded-full border border-white/10">
+              ${app.category || 'iOS'}
+            </span>
           </div>
+          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-start justify-between">
+                <h4 class="font-bold text-base text-white group-hover:text-blue-400 transition">${app.title}</h4>
+              </div>
+              <p class="text-slate-400 text-xs leading-relaxed line-clamp-3">${app.desc}</p>
+              ${app.impact ? `<span class="inline-block text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">${app.impact}</span>` : ''}
+            </div>
 
-          <div class="px-6 py-4 bg-black/60 border-t border-white/[0.06] flex items-center justify-between gap-3">
-            <button onclick="openProjectModal('${p.id}')" class="text-xs font-semibold text-cyan-400 hover:text-cyan-300">
-              Details & Specs &rarr;
-            </button>
-            <div class="flex items-center gap-2">
-              ${p.githubUrl ? `
-                <a href="${p.githubUrl}" target="_blank" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300" title="GitHub">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                </a>
-              ` : ''}
-              ${p.appStoreUrl ? `
-                <a href="${p.appStoreUrl}" target="_blank" class="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 text-cyan-300 text-xs font-mono flex items-center gap-1">
-                  <span>App Store</span> &nearr;
-                </a>
-              ` : ''}
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                ${(Array.isArray(app.tech) ? app.tech : (app.tech || '').split(','))
+                  .map(t => `<span class="text-[10px] bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded-md font-mono">${t.trim()}</span>`)
+                  .join('')}
+              </div>
+
+              <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
+                ${app.appStore ? `
+                  <a href="${app.appStore}" target="_blank" class="flex-1 text-center bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white py-1.5 rounded-xl text-xs font-semibold transition border border-blue-500/30">
+                    App Store
+                  </a>
+                ` : ''}
+                ${app.github ? `
+                  <a href="${app.github}" target="_blank" class="p-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl border border-slate-700 transition" title="Source Code">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                  </a>
+                ` : ''}
+              </div>
             </div>
           </div>
         </div>
       `).join('');
+
+      lucide.createIcons();
     }
 
-    function renderSkills() {
-      const container = document.getElementById('skills-grid');
-      container.innerHTML = SKILLS_LIST.map(skill => `
-        <div class="p-3.5 rounded-xl bg-zinc-900/40 border border-white/[0.06] flex items-center gap-2.5">
-          <svg class="w-4 h-4 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-          <span class="text-xs sm:text-sm text-zinc-200 font-medium">${skill}</span>
-        </div>
-      `).join('');
-    }
-
+    // Render Admin List
     function renderAdminProjects() {
-      const list = document.getElementById('admin-projects-list');
-      document.getElementById('admin-proj-count').textContent = currentProjects.length;
+      const container = document.getElementById('adminProjectsList');
+      document.getElementById('adminProjectCount').innerText = projects.length;
 
-      list.innerHTML = currentProjects.map(p => `
-        <div class="p-4 rounded-2xl bg-zinc-900/50 border border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <img src="${p.screenshotUrl}" alt="${p.title}" class="w-14 h-14 rounded-xl object-cover border border-white/10 shrink-0">
+      container.innerHTML = projects.map(p => `
+        <div class="p-4 flex items-center justify-between gap-4">
+          <div class="flex items-center space-x-3">
+            <img src="${p.image || 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=200'}" class="w-12 h-12 rounded-xl object-cover border border-slate-800">
             <div>
-              <div class="flex items-center gap-2">
-                <h4 class="font-bold text-white text-base">${p.title}</h4>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-cyan-300 border border-blue-500/20">${p.category}</span>
-              </div>
-              <p class="text-xs text-zinc-400 line-clamp-1">${p.subtitle}</p>
-              <span class="text-[11px] font-mono text-cyan-400">${p.architecture || ''}</span>
+              <div class="font-bold text-sm text-white">${p.title}</div>
+              <div class="text-xs text-slate-400">${p.category} • ${p.impact || 'Live'}</div>
             </div>
           </div>
-
-          <div class="flex items-center gap-2 self-end sm:self-center">
-            <button onclick="editProject('${p.id}')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 text-xs text-cyan-300 border border-white/10">
-              Edit
+          <div class="flex items-center space-x-2">
+            <button onclick="editProject('${p.id}')" class="p-2 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-slate-800 transition">
+              <i data-lucide="edit-3" class="w-4 h-4"></i>
             </button>
-            <button onclick="deleteProject('${p.id}')" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-red-500/20 text-xs text-red-300 border border-white/10">
-              Delete
+            <button onclick="deleteProject('${p.id}')" class="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-800 transition">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
           </div>
         </div>
       `).join('');
+
+      lucide.createIcons();
     }
 
-    // ADMIN AUTHENTICATION
-    function handleAdminAuth(e) {
-      e.preventDefault();
-      const pin = document.getElementById('input-pin').value.trim();
-      const validPin = currentProfile.pin || '8076';
+    // Modal Operations
+    function openProjectModal(editId = null) {
+      const modal = document.getElementById('projectModal');
+      const form = document.getElementById('projectForm');
+      form.reset();
+      document.getElementById('formProjectId').value = '';
 
-      if (pin === validPin || pin === '8076' || pin === '1234') {
-        isAdminUnlocked = true;
-        document.getElementById('admin-auth-card').classList.add('hidden');
-        document.getElementById('admin-dashboard-content').classList.remove('hidden');
-        document.getElementById('btn-lock-studio').classList.remove('hidden');
-        document.getElementById('admin-badge').textContent = 'Unlocked';
-        document.getElementById('admin-badge').className = 'text-xs font-mono px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
-        document.getElementById('pin-error').classList.add('hidden');
-        showToast('Admin Studio Unlocked!');
-        renderAdminProjects();
+      if (editId) {
+        const item = projects.find(p => p.id === editId);
+        if (item) {
+          document.getElementById('modalTitle').innerText = 'Edit iOS App';
+          document.getElementById('formProjectId').value = item.id;
+          document.getElementById('formTitle').value = item.title;
+          document.getElementById('formCategory').value = item.category || 'SwiftUI';
+          document.getElementById('formImpact').value = item.impact || '';
+          document.getElementById('formDesc').value = item.desc;
+          document.getElementById('formTech').value = Array.isArray(item.tech) ? item.tech.join(', ') : item.tech;
+          document.getElementById('formAppStore').value = item.appStore || '';
+          document.getElementById('formGithub').value = item.github || '';
+          document.getElementById('formImage').value = item.image || '';
+        }
       } else {
-        document.getElementById('pin-error').classList.remove('hidden');
+        document.getElementById('modalTitle').innerText = 'Add New iOS App';
       }
-    }
-
-    function lockStudio() {
-      isAdminUnlocked = false;
-      document.getElementById('admin-auth-card').classList.remove('hidden');
-      document.getElementById('admin-dashboard-content').classList.add('hidden');
-      document.getElementById('btn-lock-studio').classList.add('hidden');
-      document.getElementById('input-pin').value = '';
-      document.getElementById('admin-badge').textContent = 'PIN Protected';
-      document.getElementById('admin-badge').className = 'text-xs font-mono px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/30';
-      showToast('Admin Studio Locked.');
-    }
-
-    // PROJECT FORM ACTIONS
-    function openNewProjectForm() {
-      document.getElementById('project-form-card').classList.remove('hidden');
-      document.getElementById('form-heading').textContent = 'Add New iOS App';
-      document.getElementById('form-proj-id').value = '';
-      document.getElementById('form-proj-title').value = '';
-      document.getElementById('form-proj-category').value = 'SwiftUI';
-      document.getElementById('form-proj-status').value = 'Live on App Store';
-      document.getElementById('form-proj-subtitle').value = '';
-      document.getElementById('form-proj-description').value = '';
-      document.getElementById('form-proj-arch').value = 'Clean Architecture (MVVM-C)';
-      document.getElementById('form-proj-impact').value = '4.9 ★ • 100K+ Users';
-      document.getElementById('form-proj-tags').value = 'SwiftUI, Combine, async/await';
-      document.getElementById('form-proj-appstore').value = '';
-      document.getElementById('form-proj-github').value = 'https://github.com/HemantSharma8076';
-      document.getElementById('form-proj-imgurl').value = 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=700&q=80';
-      currentImageBase64 = '';
-      document.getElementById('image-preview-box').classList.add('hidden');
-    }
-
-    function closeProjectForm() {
-      document.getElementById('project-form-card').classList.add('hidden');
-    }
-
-    function editProject(id) {
-      const p = currentProjects.find(item => item.id === id);
-      if (!p) return;
-
-      document.getElementById('project-form-card').classList.remove('hidden');
-      document.getElementById('form-heading').textContent = 'Edit: ' + p.title;
-      document.getElementById('form-proj-id').value = p.id;
-      document.getElementById('form-proj-title').value = p.title;
-      document.getElementById('form-proj-category').value = p.category;
-      document.getElementById('form-proj-status').value = p.status || 'Live on App Store';
-      document.getElementById('form-proj-subtitle').value = p.subtitle;
-      document.getElementById('form-proj-description').value = p.description;
-      document.getElementById('form-proj-arch').value = p.architecture || '';
-      document.getElementById('form-proj-impact').value = p.impact || '';
-      document.getElementById('form-proj-tags').value = (p.tags || []).join(', ');
-      document.getElementById('form-proj-appstore').value = p.appStoreUrl || '';
-      document.getElementById('form-proj-github').value = p.githubUrl || '';
-      document.getElementById('form-proj-imgurl').value = p.screenshotUrl || '';
-      currentImageBase64 = '';
-      document.getElementById('image-preview-box').classList.add('hidden');
-      window.scrollTo({ top: 120, behavior: 'smooth' });
-    }
-
-    function deleteProject(id) {
-      const p = currentProjects.find(item => item.id === id);
-      currentProjects = currentProjects.filter(item => item.id !== id);
-      saveState();
-      renderFilters();
-      renderPublicProjects();
-      renderAdminProjects();
-      showToast('Deleted: ' + (p?.title || 'Project'));
-    }
-
-    function handleSaveProject(e) {
-      e.preventDefault();
-      const id = document.getElementById('form-proj-id').value;
-      const title = document.getElementById('form-proj-title').value.trim();
-      const category = document.getElementById('form-proj-category').value.trim() || 'SwiftUI';
-      const status = document.getElementById('form-proj-status').value.trim() || 'Live on App Store';
-      const subtitle = document.getElementById('form-proj-subtitle').value.trim();
-      const description = document.getElementById('form-proj-description').value.trim();
-      const architecture = document.getElementById('form-proj-arch').value.trim() || 'Clean Architecture (MVVM-C)';
-      const impact = document.getElementById('form-proj-impact').value.trim();
-      const tags = document.getElementById('form-proj-tags').value.split(',').map(t => t.trim()).filter(Boolean);
-      const appStoreUrl = document.getElementById('form-proj-appstore').value.trim();
-      const githubUrl = document.getElementById('form-proj-github').value.trim();
-      const screenshotUrl = currentImageBase64 || document.getElementById('form-proj-imgurl').value.trim() || 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=700&q=80';
-
-      const projectData = {
-        id: id || ('proj-' + Date.now()),
-        title,
-        category,
-        status,
-        subtitle,
-        description,
-        architecture,
-        impact,
-        tags,
-        appStoreUrl,
-        githubUrl,
-        screenshotUrl
-      };
-
-      if (id) {
-        currentProjects = currentProjects.map(p => p.id === id ? projectData : p);
-        showToast('Updated: ' + title);
-      } else {
-        currentProjects.unshift(projectData);
-        showToast('Added: ' + title);
-      }
-
-      saveState();
-      closeProjectForm();
-      renderFilters();
-      renderPublicProjects();
-      renderAdminProjects();
-    }
-
-    function handleImageFileSelect(e) {
-      const file = e.target.files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          currentImageBase64 = evt.target.result;
-          document.getElementById('image-preview-thumb').src = currentImageBase64;
-          document.getElementById('image-preview-box').classList.remove('hidden');
-          showToast('Screenshot attached!');
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    // PROFILE EDITOR TOGGLE & SAVE
-    function toggleProfileEditor() {
-      const card = document.getElementById('profile-editor-card');
-      card.classList.toggle('hidden');
-    }
-
-    function handleSaveProfile(e) {
-      e.preventDefault();
-      currentProfile.name = document.getElementById('edit-profile-name').value.trim() || 'Hemant Sharma';
-      currentProfile.badge = document.getElementById('edit-profile-badge').value.trim();
-      currentProfile.pin = document.getElementById('edit-profile-pin').value.trim() || '8076';
-      currentProfile.yearsExperience = document.getElementById('edit-profile-exp').value.trim();
-      currentProfile.appsShipped = document.getElementById('edit-profile-shipped').value.trim();
-      currentProfile.appDownloads = document.getElementById('edit-profile-downloads').value.trim();
-      currentProfile.crashFreeRate = document.getElementById('edit-profile-crashfree').value.trim();
-      currentProfile.tagline = document.getElementById('edit-profile-tagline').value.trim();
-      currentProfile.email = document.getElementById('edit-profile-email').value.trim();
-      currentProfile.github = document.getElementById('edit-profile-github').value.trim();
-      currentProfile.linkedin = document.getElementById('edit-profile-linkedin').value.trim();
-
-      saveState();
-      renderProfile();
-      toggleProfileEditor();
-      showToast('Profile & Bio Saved!');
-    }
-
-    // BACKUP JSON EXPORT & IMPORT
-    function exportBackupJSON() {
-      const data = JSON.stringify({ profile: currentProfile, projects: currentProjects }, null, 2);
-      const blob = new Blob([data], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `HemantSharma8076-Portfolio-Backup.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('Backup JSON downloaded!');
-    }
-
-    function importBackupJSON(e) {
-      const file = e.target.files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          try {
-            const parsed = JSON.parse(evt.target.result);
-            if (parsed.profile) currentProfile = parsed.profile;
-            if (Array.isArray(parsed.projects)) currentProjects = parsed.projects;
-            saveState();
-            renderProfile();
-            renderFilters();
-            renderPublicProjects();
-            renderAdminProjects();
-            showToast('Portfolio Restored Successfully!');
-          } catch (err) {
-            showToast('Invalid JSON file.');
-          }
-        };
-        reader.readAsText(file);
-      }
-    }
-
-    function resetDefaults() {
-      currentProfile = INITIAL_PROFILE;
-      currentProjects = INITIAL_PROJECTS;
-      saveState();
-      renderProfile();
-      renderFilters();
-      renderPublicProjects();
-      renderAdminProjects();
-      showToast('Reset to 4-Year iOS Developer Preset!');
-    }
-
-    // MODAL HANDLERS
-    function openProjectModal(id) {
-      const p = currentProjects.find(item => item.id === id);
-      if (!p) return;
-
-      document.getElementById('modal-cat').textContent = p.category;
-      document.getElementById('modal-status').textContent = p.status || 'Live on App Store';
-      document.getElementById('modal-title').textContent = p.title;
-      document.getElementById('modal-subtitle').textContent = p.subtitle;
-      document.getElementById('modal-img').src = p.screenshotUrl;
-      document.getElementById('modal-desc').textContent = p.description;
-      document.getElementById('modal-arch').textContent = p.architecture || 'Clean MVVM-C';
-      document.getElementById('modal-impact').textContent = p.impact ? `Impact: ${p.impact}` : '';
-
-      const tagsBox = document.getElementById('modal-tags');
-      tagsBox.innerHTML = (p.tags || []).map(t => `
-        <span class="px-2.5 py-1 rounded-md text-[11px] font-mono bg-white/5 text-zinc-300 border border-white/10">${t}</span>
-      `).join('');
-
-      const ghBtn = document.getElementById('modal-btn-github');
-      if (p.githubUrl) {
-        ghBtn.href = p.githubUrl;
-        ghBtn.classList.remove('hidden');
-      } else {
-        ghBtn.classList.add('hidden');
-      }
-
-      const asBtn = document.getElementById('modal-btn-appstore');
-      if (p.appStoreUrl) {
-        asBtn.href = p.appStoreUrl;
-        asBtn.classList.remove('hidden');
-      } else {
-        asBtn.classList.add('hidden');
-      }
-
-      document.getElementById('modal-project-detail').classList.remove('hidden');
+      modal.classList.remove('hidden');
     }
 
     function closeProjectModal() {
-      document.getElementById('modal-project-detail').classList.add('hidden');
+      document.getElementById('projectModal').classList.add('hidden');
     }
 
-    function openHostingModal() {
-      document.getElementById('modal-hosting').classList.remove('hidden');
+    function saveProject(e) {
+      e.preventDefault();
+      const id = document.getElementById('formProjectId').value || Date.now().toString();
+      const title = document.getElementById('formTitle').value;
+      const category = document.getElementById('formCategory').value;
+      const impact = document.getElementById('formImpact').value;
+      const desc = document.getElementById('formDesc').value;
+      const tech = document.getElementById('formTech').value.split(',').map(s => s.trim()).filter(Boolean);
+      const appStore = document.getElementById('formAppStore').value;
+      const github = document.getElementById('formGithub').value;
+      const image = document.getElementById('formImage').value || 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=600';
+
+      const fileInput = document.getElementById('formImageFile');
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          saveProjectData(id, title, category, impact, desc, tech, appStore, github, evt.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        saveProjectData(id, title, category, impact, desc, tech, appStore, github, image);
+      }
     }
 
-    function closeHostingModal() {
-      document.getElementById('modal-hosting').classList.add('hidden');
+    function saveProjectData(id, title, category, impact, desc, tech, appStore, github, image) {
+      const existingIdx = projects.findIndex(p => p.id === id);
+      const payload = { id, title, category, impact, desc, tech, appStore, github, image };
+
+      if (existingIdx >= 0) {
+        projects[existingIdx] = payload;
+        showToast('App details updated');
+      } else {
+        projects.unshift(payload);
+        showToast('New app successfully added');
+      }
+
+      localStorage.setItem('hemant_ios_projects', JSON.stringify(projects));
+      closeProjectModal();
+      renderAdminProjects();
     }
 
-    function openContactModal() {
-      document.getElementById('modal-contact').classList.remove('hidden');
+    function editProject(id) {
+      openProjectModal(id);
     }
 
-    function closeContactModal() {
-      document.getElementById('modal-contact').classList.add('hidden');
+    function deleteProject(id) {
+      if (confirm('Are you sure you want to delete this app?')) {
+        projects = projects.filter(p => p.id !== id);
+        localStorage.setItem('hemant_ios_projects', JSON.stringify(projects));
+        renderAdminProjects();
+        showToast('App removed');
+      }
     }
 
-    // INITIAL BOOTSTRAP
+    // Init
+    window.addEventListener('hashchange', checkRoute);
     window.addEventListener('DOMContentLoaded', () => {
-      loadState();
-      renderProfile();
-      renderFilters();
-      renderPublicProjects();
-      renderSkills();
+      checkRoute();
+      lucide.createIcons();
     });
   </script>
 </body>
