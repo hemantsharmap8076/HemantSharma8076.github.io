@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hemant Sharma | Senior iOS Engineer</title>
+  <title>Hemant Sharma | iOS Developer (Swift)</title>
+  <meta name="description" content="Hemant Sharma — iOS Developer in Noida, India. 4+ years building and shipping Swift apps on the App Store.">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -67,20 +68,26 @@
       background: #1E293B;
       border-radius: 9999px;
     }
+    .initial-tile {
+      background:
+        radial-gradient(circle at 25% 20%, rgba(10,132,255,0.30), transparent 60%),
+        radial-gradient(circle at 80% 85%, rgba(94,92,230,0.28), transparent 60%),
+        #0B1016;
+    }
   </style>
 </head>
 <body class="selection:bg-blue-600/30 selection:text-blue-300">
 
-  <!-- PUBLIC NAVBAR (No admin button, pure professional Apple look) -->
+  <!-- PUBLIC NAVBAR -->
   <nav id="publicNavbar" class="sticky top-0 z-50 glass-nav transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-black text-sm">
-          
+          HS
         </div>
         <div>
           <span class="font-bold text-sm tracking-tight text-white block">Hemant Sharma</span>
-          <span class="text-[11px] text-blue-400 font-mono tracking-wide">Senior iOS Engineer • 4+ YOE</span>
+          <span class="text-[11px] text-blue-400 font-mono tracking-wide">iOS Developer • Swift • 4+ YOE</span>
         </div>
       </div>
       <div class="flex items-center space-x-3">
@@ -88,7 +95,7 @@
           <i data-lucide="share-2" class="w-3.5 h-3.5 text-blue-400"></i>
           <span>Share</span>
         </button>
-        <button onclick="scrollToContact()" class="text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 px-4 py-1.5 rounded-full shadow-lg shadow-blue-600/30 transition">
+        <button onclick="openContactModal('navbar')" class="text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 px-4 py-1.5 rounded-full shadow-lg shadow-blue-600/30 transition">
           Contact
         </button>
       </div>
@@ -116,18 +123,18 @@
     <section class="text-center max-w-3xl mx-auto space-y-5 pt-6">
       <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
         <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
-        <span>Available for High-Impact iOS & Swift Projects</span>
+        <span>Open to iOS Developer roles</span>
       </div>
       <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-        Architecting Smooth, <br class="hidden sm:block" />
+        Swift apps, shipped <br class="hidden sm:block" />
         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400">
-          Apple-Standard Experiences.
+          to the App Store.
         </span>
       </h1>
       <p class="text-sm sm:text-base text-slate-400 leading-relaxed font-light">
-        4+ years specializing in SwiftUI, UIKit, Combine, Clean MVVM-C architectures, CoreML, and high-performance offline caching. Built and deployed scalable apps on the App Store.
+        iOS Developer with 4+ years building and maintaining Swift apps across shopping, healthcare, wellness, travel and business domains. UIKit, SwiftUI, MVVM, REST APIs, payment gateways, Google Maps, push notifications and ad SDKs — from first screen to App Store release.
       </p>
-      
+
       <!-- Metrics -->
       <div class="grid grid-cols-3 gap-3 pt-4 max-w-xl mx-auto">
         <div class="apple-card p-4 rounded-2xl text-center">
@@ -135,12 +142,12 @@
           <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Years iOS Exp</div>
         </div>
         <div class="apple-card p-4 rounded-2xl text-center">
-          <div id="statProjectsCount" class="text-2xl sm:text-3xl font-extrabold text-blue-400 font-mono">4</div>
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Apps Shipped</div>
+          <div id="statLiveCount" class="text-2xl sm:text-3xl font-extrabold text-blue-400 font-mono">0</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Live on App Store</div>
         </div>
         <div class="apple-card p-4 rounded-2xl text-center">
-          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">99.8%</div>
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Crash-Free Rate</div>
+          <div id="statProjectsCount" class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono">0</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Apps Worked On</div>
         </div>
       </div>
     </section>
@@ -150,16 +157,15 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
         <div>
           <h2 class="text-xl font-bold text-white tracking-tight flex items-center space-x-2">
-            <span>Featured iOS Apps</span>
+            <span>iOS Apps</span>
             <span class="text-xs bg-slate-800 text-blue-400 font-mono px-2 py-0.5 rounded-full border border-slate-700" id="projectBadgeTotal">0 Apps</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Explore production iOS applications & technical architectures.</p>
+          <p class="text-xs text-slate-400 mt-0.5">Production apps on the App Store, plus work currently in development.</p>
         </div>
         <div class="flex items-center flex-wrap gap-1.5" id="filterContainer">
           <button onclick="setFilter('All')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-blue-600 text-white" data-filter="All">All</button>
-          <button onclick="setFilter('SwiftUI')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="SwiftUI">SwiftUI</button>
-          <button onclick="setFilter('UIKit')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="UIKit">UIKit</button>
-          <button onclick="setFilter('CoreML')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="CoreML">CoreML</button>
+          <button onclick="setFilter('Live')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="Live">On App Store</button>
+          <button onclick="setFilter('In Development')" class="filter-btn text-xs px-3 py-1 rounded-full font-medium transition bg-slate-900 text-slate-400 hover:text-white border border-slate-800" data-filter="In Development">In Development</button>
         </div>
       </div>
 
@@ -176,8 +182,8 @@
           <i data-lucide="layers" class="w-4 h-4"></i>
         </div>
         <div>
-          <h3 class="text-lg font-bold text-white">Technical iOS Specialization</h3>
-          <p class="text-xs text-slate-400">Production-hardened skills honed across 4 years of Apple platform engineering.</p>
+          <h3 class="text-lg font-bold text-white">Technical Skills</h3>
+          <p class="text-xs text-slate-400">What I use day to day on production iOS work.</p>
         </div>
       </div>
 
@@ -185,44 +191,154 @@
         <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
           <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-            <span>Swift & Architecture</span>
+            <span>Swift &amp; Architecture</span>
           </div>
-          <p class="text-slate-400 leading-relaxed">Swift 5.10+, SwiftUI, UIKit, MVVM-C, Clean Swift, Async/Await Concurrency, Actors, Modular SPM.</p>
+          <p class="text-slate-400 leading-relaxed">Swift, Objective-C, UIKit, SwiftUI, Combine, MVVM, MVC, Protocol-Oriented Programming, Auto Layout, programmatic UI.</p>
         </div>
         <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
           <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span>Data & Offline First</span>
+            <span>Data &amp; Networking</span>
           </div>
-          <p class="text-slate-400 leading-relaxed">SwiftData, CoreData, Realm, URLSession, Combine Reactive Streams, Keychain & Biometric Auth.</p>
+          <p class="text-slate-400 leading-relaxed">REST APIs, URLSession, Alamofire, Codable, SwiftyJSON, Core Data, Core Location, offline caching, token refresh.</p>
         </div>
         <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
           <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-            <span>Apple Ecosystem & AI</span>
+            <span>Integrations &amp; Release</span>
           </div>
-          <p class="text-slate-400 leading-relaxed">CoreML, VisionKit, WidgetKit, StoreKit 2 (In-App Subscriptions), PushKit, Fastlane, TestFlight CI/CD.</p>
+          <p class="text-slate-400 leading-relaxed">Payments (UPI, cards, net banking), Google Maps, Push Notifications (APNs, FCM), in-app chat, Meta Audience Network, Google AdMob, Firebase, TestFlight, App Store releases.</p>
+        </div>
+        <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
+          <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+            <span>Tools</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">Xcode, Git, GitHub, Bitbucket, CocoaPods, Swift Package Manager, Postman, Instruments, Crashlytics.</p>
+        </div>
+        <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
+          <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            <span>AI-Assisted Development</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">Claude, ChatGPT, GitHub Copilot and Xcode predictive completion for code review, refactoring, unit test generation and debugging.</p>
+        </div>
+        <div class="p-3.5 bg-slate-900/60 rounded-xl border border-slate-800/80">
+          <div class="font-semibold text-slate-200 mb-1.5 flex items-center space-x-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+            <span>Ways of Working</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">Agile / Scrum, code reviews, QA coordination on regression testing, App Store review handling, reusable component libraries.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 apple-card p-6 sm:p-8 rounded-3xl space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
+            <i data-lucide="briefcase" class="w-4 h-4"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Experience</h3>
+        </div>
+
+        <div class="space-y-5">
+          <div class="relative pl-5 border-l border-slate-800">
+            <span class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <h4 class="text-sm font-bold text-white">iOS Developer · <span class="text-blue-400">Appsinvo Pvt Ltd</span></h4>
+              <span class="text-[11px] font-mono text-slate-400">May 2024 – Present</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-2">Noida, Uttar Pradesh</p>
+            <ul class="text-xs text-slate-400 leading-relaxed space-y-1.5 list-disc pl-4 marker:text-blue-500">
+              <li>Developed and maintained production iOS apps in Swift across shopping, healthcare, wellness, travel and business domains.</li>
+              <li>Built screens in UIKit and SwiftUI on MVVM, keeping view controllers thin and view models testable.</li>
+              <li>Integrated REST APIs, payment gateways, Google Maps, push notifications, in-app chat and ad SDKs.</li>
+              <li>Shipped releases through TestFlight and the App Store, and resolved App Store review rejections with QA.</li>
+            </ul>
+          </div>
+
+          <div class="relative pl-5 border-l border-slate-800">
+            <span class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-slate-600"></span>
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <h4 class="text-sm font-bold text-white">iOS Developer · <span class="text-blue-400">Webnmobapps Solutions Pvt Ltd</span></h4>
+              <span class="text-[11px] font-mono text-slate-400">Nov 2021 – Apr 2024</span>
+            </div>
+            <p class="text-[11px] text-slate-500 mb-2">Noida, Uttar Pradesh</p>
+            <ul class="text-xs text-slate-400 leading-relaxed space-y-1.5 list-disc pl-4 marker:text-blue-500">
+              <li>Built and shipped client iOS applications in Swift, from UI implementation through App Store submission.</li>
+              <li>Integrated REST APIs, third-party SDKs and push notifications; converted Figma and XD designs into pixel-accurate screens.</li>
+              <li>Wrote reusable components and shared network layers that cut repeated code across client projects.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="apple-card p-6 sm:p-8 rounded-3xl space-y-5">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+            <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Education</h3>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h4 class="text-sm font-bold text-white">MCA</h4>
+              <span class="text-[11px] font-mono text-slate-400">2022</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">Master of Computer Applications — R.D. Engineering College, Ghaziabad (AKTU)</p>
+          </div>
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h4 class="text-sm font-bold text-white">BCA</h4>
+              <span class="text-[11px] font-mono text-slate-400">2018</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">Bachelor of Computer Applications — Chaudhary Charan Singh University (CCSU)</p>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-800/80 space-y-1.5">
+          <p class="text-[11px] text-slate-500 uppercase tracking-wider font-semibold">Based in</p>
+          <p class="text-xs text-slate-300">Noida, Uttar Pradesh, India</p>
         </div>
       </div>
     </section>
 
     <!-- Contact & Footer -->
     <section id="contactSection" class="text-center py-12 border-t border-slate-800/60 space-y-4">
-      <h3 class="text-2xl font-bold text-white">Let's Build Something Exceptional</h3>
+      <h3 class="text-2xl font-bold text-white">Let's work together</h3>
       <p class="text-xs sm:text-sm text-slate-400 max-w-lg mx-auto">
-        Feel free to reach out for Senior iOS roles, technical consultations, or contracting opportunities.
+        Open to iOS Developer roles and Swift contract work. Fastest way to reach me is email.
       </p>
-      <div class="flex items-center justify-center gap-3 pt-2">
-        <a href="mailto:hemantsharma8076@gmail.com" class="px-5 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-lg shadow-blue-500/25 transition flex items-center space-x-2">
-          <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-          <span>Email Hemant</span>
+
+      <div class="pt-2">
+        <button onclick="openContactModal('contact-section')" class="px-6 py-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold shadow-lg shadow-blue-500/25 transition inline-flex items-center space-x-2">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          <span>Send me a message</span>
+        </button>
+      </div>
+
+      <p class="text-[11px] text-slate-500 pt-1">or reach me directly</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+        <a href="mailto:hemantsharmap8076@gmail.com" class="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-medium transition flex items-center space-x-2">
+          <i data-lucide="mail" class="w-3.5 h-3.5 text-blue-400"></i>
+          <span>hemantsharmap8076@gmail.com</span>
         </a>
-        <a href="https://github.com/hemantsharmap8076" target="_blank" class="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-medium transition flex items-center space-x-2">
+        <a href="tel:+918076747367" class="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-medium transition flex items-center space-x-2">
+          <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>+91 80767 47367</span>
+        </a>
+        <a href="https://github.com/hemantsharmap8076" target="_blank" rel="noopener" class="px-5 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-medium transition flex items-center space-x-2">
           <i data-lucide="github" class="w-3.5 h-3.5"></i>
           <span>GitHub</span>
         </a>
       </div>
-      <p class="text-[11px] text-slate-600 pt-6">© 2026 Hemant Sharma • Designed with Cupertino Dark Standards</p>
+
+      <p class="text-[11px] text-slate-600 pt-6">© 2026 Hemant Sharma • iOS Developer • Noida, India</p>
     </section>
   </main>
 
@@ -234,9 +350,9 @@
         <i data-lucide="lock" class="w-6 h-6"></i>
       </div>
       <h2 class="text-xl font-bold text-white">Admin Studio Login</h2>
-      <p class="text-xs text-slate-400">Enter your secure 4-digit PIN to manage projects.</p>
+      <p class="text-xs text-slate-400">Enter your 4-digit PIN to manage projects on this device.</p>
       <div class="flex justify-center pt-2">
-        <input id="adminPinInput" type="password" maxlength="6" placeholder="PIN (8076)" class="w-40 text-center tracking-widest text-lg font-mono bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-amber-400">
+        <input id="adminPinInput" type="password" maxlength="6" placeholder="PIN" class="w-40 text-center tracking-widest text-lg font-mono bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-amber-400">
       </div>
       <div class="flex items-center justify-center gap-2 pt-2">
         <button onclick="verifyAdminPin()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2 rounded-xl text-xs transition">
@@ -246,7 +362,7 @@
           Cancel
         </button>
       </div>
-      <p id="pinError" class="text-red-400 text-xs hidden">Incorrect PIN. Try 8076 or 1234.</p>
+      <p id="pinError" class="text-red-400 text-xs hidden">Incorrect PIN.</p>
     </div>
 
     <!-- Authenticated Admin Content -->
@@ -254,12 +370,17 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
         <div>
           <h2 class="text-lg font-bold text-white">Project Management Studio</h2>
-          <p class="text-xs text-slate-400">Add, edit or delete iOS apps. All changes automatically update your portfolio.</p>
+          <p class="text-xs text-slate-400">Add, edit or delete apps. Changes are saved in this browser only.</p>
         </div>
-        <button onclick="openProjectModal()" class="flex items-center space-x-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-lg shadow-blue-500/30 transition">
-          <i data-lucide="plus-circle" class="w-4 h-4"></i>
-          <span>+ Add New iOS App</span>
-        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="resetToDefaults()" class="text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-700 px-3 py-2 rounded-xl transition">
+            Reset to site defaults
+          </button>
+          <button onclick="openProjectModal()" class="flex items-center space-x-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-lg shadow-blue-500/30 transition">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span>+ Add New iOS App</span>
+          </button>
+        </div>
       </div>
 
       <!-- Current Projects Table -->
@@ -289,33 +410,36 @@
 
         <div>
           <label class="block font-medium text-slate-300 mb-1">App Title *</label>
-          <input id="formTitle" required placeholder="e.g. HealthTrack AI" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+          <input id="formTitle" required placeholder="e.g. DeliverIt by Urban Harvest" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-medium text-slate-300 mb-1">Tag / Tech Stack *</label>
+            <label class="block font-medium text-slate-300 mb-1">Status *</label>
             <select id="formCategory" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
-              <option value="SwiftUI">SwiftUI</option>
-              <option value="UIKit">UIKit</option>
-              <option value="CoreML">CoreML</option>
-              <option value="Combine">Combine</option>
+              <option value="Live">On App Store</option>
+              <option value="In Development">In Development</option>
             </select>
           </div>
           <div>
-            <label class="block font-medium text-slate-300 mb-1">Role / Impact Metric</label>
-            <input id="formImpact" placeholder="e.g. 50k+ Active Users" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+            <label class="block font-medium text-slate-300 mb-1">Domain</label>
+            <input id="formDomain" placeholder="e.g. Travel" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
           </div>
+        </div>
+
+        <div>
+          <label class="block font-medium text-slate-300 mb-1">Highlight (optional — use a real, verifiable fact)</label>
+          <input id="formImpact" placeholder="e.g. Rated 4.4 on the App Store" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
         </div>
 
         <div>
           <label class="block font-medium text-slate-300 mb-1">Description *</label>
-          <textarea id="formDesc" rows="3" required placeholder="Details about architecture, features, and performance..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500"></textarea>
+          <textarea id="formDesc" rows="3" required placeholder="What you built, and how — architecture, features, integrations." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500"></textarea>
         </div>
 
         <div>
           <label class="block font-medium text-slate-300 mb-1">Tech Badges (Comma-separated)</label>
-          <input id="formTech" placeholder="SwiftUI, CoreData, StoreKit, Clean MVVM" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+          <input id="formTech" placeholder="Swift, UIKit, MVVM, REST APIs" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
         </div>
 
         <div>
@@ -329,8 +453,8 @@
         </div>
 
         <div>
-          <label class="block font-medium text-slate-300 mb-1">Screenshot (Image URL or Upload)</label>
-          <input id="formImage" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500 mb-2">
+          <label class="block font-medium text-slate-300 mb-1">Screenshot (Image URL or Upload — optional)</label>
+          <input id="formImage" placeholder="Leave empty to use the lettermark tile" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500 mb-2">
           <input type="file" id="formImageFile" accept="image/*" class="text-[11px] text-slate-400 file:mr-2 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[11px] file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500">
         </div>
 
@@ -342,6 +466,97 @@
     </div>
   </div>
 
+  <!-- ================= CONTACT FORM MODAL ================= -->
+  <div id="contactModal" class="hidden fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="handleContactBackdrop(event)">
+    <div class="apple-card w-full max-w-md p-6 rounded-3xl space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+      <div class="flex items-start justify-between border-b border-slate-800 pb-3">
+        <div>
+          <h3 id="contactModalTitle" class="text-base font-bold text-white">Get in touch</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">Tell me about the role or project. I usually reply within a day.</p>
+        </div>
+        <button onclick="closeContactModal()" aria-label="Close contact form" class="text-slate-400 hover:text-white shrink-0 ml-3">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Success state -->
+      <div id="contactSuccess" class="hidden text-center py-8 space-y-3">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto">
+          <i data-lucide="check" class="w-6 h-6"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white">Message sent</h4>
+        <p class="text-xs text-slate-400">Thanks for reaching out. I'll get back to you at the email you gave.</p>
+        <button onclick="closeContactModal()" class="text-xs font-semibold text-blue-400 hover:text-blue-300 pt-1">Close</button>
+      </div>
+
+      <!-- Form -->
+      <form id="contactForm" onsubmit="submitContactForm(event)" class="space-y-3.5 text-xs" novalidate>
+        <!-- Honeypot: real people never fill this in -->
+        <input type="checkbox" name="botcheck" id="contactBotcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div>
+          <label for="contactName" class="block font-medium text-slate-300 mb-1">Your name *</label>
+          <input id="contactName" name="name" autocomplete="name" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="Priya Mehta">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="contactEmail" class="block font-medium text-slate-300 mb-1">Email *</label>
+            <input id="contactEmail" name="email" type="email" autocomplete="email" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="you@company.com">
+          </div>
+          <div>
+            <label for="contactCompany" class="block font-medium text-slate-300 mb-1">Company</label>
+            <input id="contactCompany" name="company" autocomplete="organization" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="Optional">
+          </div>
+        </div>
+
+        <div>
+          <label for="contactReason" class="block font-medium text-slate-300 mb-1">What is this about?</label>
+          <select id="contactReason" name="reason" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+            <option value="Full-time iOS role">Full-time iOS role</option>
+            <option value="Contract / freelance project">Contract / freelance project</option>
+            <option value="Question about an app">Question about an app</option>
+            <option value="Something else">Something else</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="contactMessage" class="block font-medium text-slate-300 mb-1">Message *</label>
+          <textarea id="contactMessage" name="message" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500" placeholder="A few lines about the role, team or project."></textarea>
+        </div>
+
+        <p id="contactError" class="hidden text-red-400 text-[11px] leading-relaxed"></p>
+
+        <div class="flex items-center justify-between gap-2 pt-3 border-t border-slate-800">
+          <span class="text-[10px] text-slate-500">Goes straight to my inbox.</span>
+          <button id="contactSubmitBtn" type="submit" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-lg shadow-blue-500/30 transition disabled:opacity-60 disabled:cursor-not-allowed">
+            Send message
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= FIRST-VISIT CONTACT PROMPT ================= -->
+  <div id="visitorPrompt" class="hidden fixed bottom-6 left-6 right-6 sm:right-auto sm:max-w-xs z-50 apple-card rounded-2xl p-4 shadow-2xl transition-all duration-500 transform translate-y-6 opacity-0">
+    <button onclick="dismissVisitorPrompt()" aria-label="Dismiss" class="absolute top-2.5 right-2.5 text-slate-500 hover:text-white">
+      <i data-lucide="x" class="w-3.5 h-3.5"></i>
+    </button>
+    <div class="flex items-start space-x-3 pr-4">
+      <div class="w-8 h-8 shrink-0 rounded-xl bg-blue-500/10 border border-blue-500/25 text-blue-400 flex items-center justify-center">
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+      </div>
+      <div class="space-y-2">
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Hiring for an iOS role, or have a project in mind? Send me a message.
+        </p>
+        <button onclick="openContactModal('visitor-prompt')" class="text-[11px] font-semibold text-white bg-blue-600 hover:bg-blue-500 px-3 py-1.5 rounded-full transition">
+          Open contact form
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION -->
   <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-slate-700 text-white text-xs px-4 py-2.5 rounded-2xl shadow-2xl flex items-center space-x-2 transition-all transform translate-y-20 opacity-0 pointer-events-none">
     <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
@@ -349,57 +564,165 @@
   </div>
 
   <script>
-    // Initial Seed Projects
+    // ===================== CONTACT FORM SETTINGS =====================
+    // 1. Sign up free at https://web3forms.com with hemantsharmap8076@gmail.com
+    // 2. Paste the access key they email you between the quotes below.
+    // Until a key is set, the form opens the visitor's email app with the
+    // message pre-filled instead, so it still works.
+    const WEB3FORMS_ACCESS_KEY = '';
+    const CONTACT_EMAIL = 'hemantsharmap8076@gmail.com';
+
+    // First-visit prompt: seconds to wait before it slides in. Set to 0 to turn it off.
+    const VISITOR_PROMPT_DELAY_SECONDS = 15;
+    // true = open the full form automatically instead of the small prompt card.
+    const VISITOR_PROMPT_OPENS_FORM = false;
+    const VISITOR_PROMPT_KEY = 'hemant_contact_prompt_seen';
+    // =================================================================
+
+    // ---- Real apps, matching the resume. Keep every claim here verifiable. ----
+    const STORAGE_KEY = 'hemant_ios_projects_v2';
+
     const defaultProjects = [
       {
-        id: '1',
-        title: 'PulseFit - Workout Tracker',
-        category: 'SwiftUI',
-        impact: '4.8★ App Store (12K+ MAU)',
-        desc: 'Comprehensive workout tracking engine with real-time biometric charts, offline CoreData syncing, and Apple Watch widget integration.',
-        tech: ['SwiftUI', 'HealthKit', 'SwiftData', 'WatchOS'],
-        appStore: 'https://apple.com',
-        github: 'https://github.com/hemantsharmap8076',
-        image: 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=600&auto=format&fit=crop&q=80'
+        id: 'deliverit',
+        title: 'DeliverIt by Urban Harvest',
+        category: 'Live',
+        domain: 'Shopping (B2B, HoReCa)',
+        impact: 'Rated 4.4 on the App Store',
+        desc: 'Ordering app for hotels, restaurants and caterers in Delhi NCR, with a catalog of 500+ products across groceries, dairy, beverages and kitchen essentials. Built delivery time-slot selection, multi-mode payments, quick reorder, credit limit and bills view, flash deals and personalised recommendations.',
+        tech: ['Swift', 'UIKit', 'MVVM', 'REST APIs', 'Payments'],
+        appStore: 'https://apps.apple.com/in/app/deliverit-by-urban-harvest/id6738718127',
+        github: '',
+        image: ''
       },
       {
-        id: '2',
-        title: 'CogniScan - Document AI',
-        category: 'CoreML',
-        impact: '99.4% OCR Accuracy',
-        desc: 'On-device neural network scanner using VisionKit & custom CoreML models for edge-based text extraction and PDF creation.',
-        tech: ['CoreML', 'VisionKit', 'Combine', 'PDFKit'],
-        appStore: 'https://apple.com',
-        github: 'https://github.com/hemantsharmap8076',
-        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80'
+        id: 'audix',
+        title: 'Audix: Online Hearing Test',
+        category: 'Live',
+        domain: 'Medical',
+        impact: '',
+        desc: 'In-app hearing test that measures hearing levels and generates personalised hearing aid recommendations. Implemented expert consultation booking and appointment management with automated reminders.',
+        tech: ['Swift', 'UIKit', 'MVVM', 'REST APIs', 'AVFoundation'],
+        appStore: 'https://apps.apple.com/in/app/audix-online-hearing-test/id6759275725',
+        github: '',
+        image: ''
       },
       {
-        id: '3',
-        title: 'ZenVault - Crypto & Fiat Wallet',
-        category: 'UIKit',
-        impact: '$2.4M Volume Protected',
-        desc: 'High-security banking interface with custom Keychain encryption, FaceID authentication, and reactive Websockets ticker updates.',
-        tech: ['UIKit', 'Keychain', 'MVVM-C', 'WebSockets'],
-        appStore: 'https://apple.com',
-        github: 'https://github.com/hemantsharmap8076',
-        image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&auto=format&fit=crop&q=80'
+        id: 'spabibo',
+        title: 'SPABIBO: Wellness & Spa Booking',
+        category: 'Live',
+        domain: 'Lifestyle',
+        impact: '',
+        desc: 'Spa discovery with filters for location, service, rating and price, and a booking flow completed in a few taps. Added secure payments, verified reviews, automated reminders, and an owner-side module to manage appointments, customers and payments in real time.',
+        tech: ['Swift', 'UIKit', 'MVVM', 'Payments', 'Push Notifications'],
+        appStore: 'https://apps.apple.com/in/app/spabibo-wellness-spa-booking/id6754586530',
+        github: '',
+        image: ''
       },
       {
-        id: '4',
-        title: 'AuraPlayer - Spatial Audio App',
-        category: 'SwiftUI',
-        impact: 'Featured on AppStore',
-        desc: 'Custom AVFoundation pipeline supporting lossless audio playback, dynamic waveform scrubbing, and lockscreen dynamic island widgets.',
-        tech: ['AVFoundation', 'ActivityKit', 'SwiftUI', 'StoreKit 2'],
-        appStore: 'https://apple.com',
-        github: 'https://github.com/hemantsharmap8076',
-        image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80'
+        id: 'cosotrip',
+        title: 'CosoTrip: Group Trips & Travel',
+        category: 'Live',
+        domain: 'Travel',
+        impact: '',
+        desc: 'Community travel app to discover and book group trips from verified hosts, with filters by destination, dates, category and traveller type. Integrated secure payments with refund handling and in-app chat with trip hosts.',
+        tech: ['Swift', 'UIKit', 'MVVM', 'In-app Chat', 'Payments'],
+        appStore: 'https://apps.apple.com/in/app/cosotrip-group-trips-travel/id6754905707',
+        github: '',
+        image: ''
+      },
+      {
+        id: 'cosotrip-host',
+        title: 'CosoTrip Host: List Trip & Earn',
+        category: 'Live',
+        domain: 'Travel',
+        impact: '',
+        desc: 'Host-side app for trip organisers to create listings with photos, pricing, inclusions and exclusions. Added a booking dashboard, traveller chat, secure payouts and boosted listings for extra visibility.',
+        tech: ['Swift', 'UIKit', 'MVVM', 'Payouts', 'In-app Chat'],
+        appStore: 'https://apps.apple.com/in/app/cosotrip-host-list-trip-earn/id6752023512',
+        github: '',
+        image: ''
+      },
+      {
+        id: 'globtrade',
+        title: 'GlobTrade: From Local to Global',
+        category: 'Live',
+        domain: 'Business',
+        impact: '',
+        desc: 'Business promotion app where local sellers create profiles, upload product details and connect with verified customers. Integrated Google Maps based listings for nearby seller discovery and in-app banner advertisements.',
+        tech: ['Swift', 'UIKit', 'Google Maps', 'AdMob', 'REST APIs'],
+        appStore: 'https://apps.apple.com/in/app/globtrade/id6765655022',
+        github: '',
+        image: ''
+      },
+      {
+        id: 'shortpass',
+        title: 'ShortPass',
+        category: 'In Development',
+        domain: 'Travel / Staycations',
+        impact: '',
+        desc: 'Building the Staycations listing and details screens fully in programmatic UIKit with Auto Layout, without Storyboard, for consistent rendering across device sizes. Structured on MVVM with SwiftyJSON-backed parsing, keeping API response handling and state out of the view controllers.',
+        tech: ['Swift', 'UIKit', 'Programmatic UI', 'MVVM', 'SwiftyJSON'],
+        appStore: '',
+        github: '',
+        image: ''
+      },
+      {
+        id: 'speedycem',
+        title: 'SpeedyCem',
+        category: 'In Development',
+        domain: 'Services',
+        impact: '',
+        desc: 'Built the order details and invoice screens, rendering line items, totals and order status from the API. Implemented MVVM view models exposing onSuccess and onError closures, so loading, empty and failure states are handled in one place per screen.',
+        tech: ['Swift', 'UIKit', 'MVVM', 'REST APIs'],
+        appStore: '',
+        github: '',
+        image: ''
       }
     ];
 
-    let projects = JSON.parse(localStorage.getItem('hemant_ios_projects')) || defaultProjects;
+    let projects = loadProjects();
     let activeFilter = 'All';
     let isAdminAuthenticated = false;
+
+    function loadProjects() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (Array.isArray(saved) && saved.length) return saved;
+      } catch (e) { /* ignore unreadable storage */ }
+      return defaultProjects;
+    }
+
+    function persistProjects() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+      } catch (e) { /* storage may be unavailable */ }
+    }
+
+    function resetToDefaults() {
+      projects = defaultProjects.slice();
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      renderAdminProjects();
+      showToast('Reset to the apps published with the site');
+    }
+
+    function escapeHtml(str) {
+      return String(str == null ? '' : str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    // Lettermark from the brand word: camel-case caps (DeliverIt -> DI), else first two letters.
+    function initialsOf(title) {
+      const brand = String(title || '')
+        .split(':')[0]
+        .replace(/[^A-Za-z ]/g, ' ')
+        .trim().split(/\s+/)[0] || '';
+      if (!brand) return 'iOS';
+      const caps = brand.match(/[A-Z]/g) || [];
+      if (caps.length >= 2) return caps.slice(0, 2).join('');
+      return brand.slice(0, 2).toUpperCase();
+    }
 
     // Toast
     function showToast(message) {
@@ -429,14 +752,13 @@
     function checkRoute() {
       const hash = window.location.hash || '#portfolio';
       const isParamAdmin = window.location.search.includes('admin');
-      
+
       const publicNavbar = document.getElementById('publicNavbar');
       const adminHeader = document.getElementById('adminHeader');
       const publicView = document.getElementById('publicView');
       const adminView = document.getElementById('adminView');
 
       if (hash === '#admin' || isParamAdmin) {
-        // Show Admin Mode Only
         publicNavbar.classList.add('hidden');
         publicView.classList.add('hidden');
         adminHeader.classList.remove('hidden');
@@ -452,7 +774,6 @@
           renderAdminProjects();
         }
       } else {
-        // Show Clean Public View
         publicNavbar.classList.remove('hidden');
         publicView.classList.remove('hidden');
         adminHeader.classList.add('hidden');
@@ -462,10 +783,10 @@
       lucide.createIcons();
     }
 
-    // Admin PIN Verification
+    // Admin PIN (convenience lock only — this is a public page, not real security)
     function verifyAdminPin() {
       const pin = document.getElementById('adminPinInput').value;
-      if (pin === '8076' || pin === '1234') {
+      if (pin === '8076') {
         isAdminAuthenticated = true;
         document.getElementById('pinError').classList.add('hidden');
         document.getElementById('pinLockModal').classList.add('hidden');
@@ -493,11 +814,13 @@
     // Render Public Grid
     function renderPublicProjects() {
       const grid = document.getElementById('projectsGrid');
-      const filtered = activeFilter === 'All' 
-        ? projects 
+      const filtered = activeFilter === 'All'
+        ? projects
         : projects.filter(p => (p.category || '').toLowerCase() === activeFilter.toLowerCase());
 
+      const liveCount = projects.filter(p => (p.category || '') === 'Live').length;
       document.getElementById('statProjectsCount').innerText = projects.length;
+      document.getElementById('statLiveCount').innerText = liveCount;
       document.getElementById('projectBadgeTotal').innerText = `${projects.length} Apps`;
 
       if (filtered.length === 0) {
@@ -511,48 +834,60 @@
         return;
       }
 
-      grid.innerHTML = filtered.map(app => `
+      grid.innerHTML = filtered.map(app => {
+        const isLive = (app.category || '') === 'Live';
+        const statusChip = isLive
+          ? `<span class="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-[11px] font-mono text-emerald-400 px-2.5 py-0.5 rounded-full border border-emerald-500/30">On App Store</span>`
+          : `<span class="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-[11px] font-mono text-amber-400 px-2.5 py-0.5 rounded-full border border-amber-500/30">In Development</span>`;
+
+        const visual = app.image
+          ? `<img src="${escapeHtml(app.image)}" alt="${escapeHtml(app.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100">`
+          : `<div class="initial-tile w-full h-full flex flex-col items-center justify-center">
+               <span class="font-mono font-extrabold text-4xl text-white/85 tracking-tight">${escapeHtml(initialsOf(app.title))}</span>
+               ${app.domain ? `<span class="mt-2 text-[11px] uppercase tracking-[0.15em] text-slate-400">${escapeHtml(app.domain)}</span>` : ''}
+             </div>`;
+
+        return `
         <div class="apple-card rounded-3xl overflow-hidden flex flex-col group">
-          <div class="h-48 w-full bg-slate-950 relative overflow-hidden">
-            <img src="${app.image || 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=600'}" 
-                 alt="${app.title}" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100">
-            <span class="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-[11px] font-mono text-blue-400 px-2.5 py-0.5 rounded-full border border-white/10">
-              ${app.category || 'iOS'}
-            </span>
+          <div class="h-40 w-full bg-slate-950 relative overflow-hidden">
+            ${visual}
+            ${statusChip}
           </div>
           <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
             <div class="space-y-2">
-              <div class="flex items-start justify-between">
-                <h4 class="font-bold text-base text-white group-hover:text-blue-400 transition">${app.title}</h4>
-              </div>
-              <p class="text-slate-400 text-xs leading-relaxed line-clamp-3">${app.desc}</p>
-              ${app.impact ? `<span class="inline-block text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">${app.impact}</span>` : ''}
+              <h4 class="font-bold text-base text-white group-hover:text-blue-400 transition">${escapeHtml(app.title)}</h4>
+              <p class="text-slate-400 text-xs leading-relaxed">${escapeHtml(app.desc)}</p>
+              ${app.impact ? `<span class="inline-block text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">${escapeHtml(app.impact)}</span>` : ''}
             </div>
 
             <div class="space-y-4 pt-2">
               <div class="flex flex-wrap gap-1.5">
-                ${(Array.isArray(app.tech) ? app.tech : (app.tech || '').split(','))
-                  .map(t => `<span class="text-[10px] bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded-md font-mono">${t.trim()}</span>`)
+                ${(Array.isArray(app.tech) ? app.tech : String(app.tech || '').split(','))
+                  .filter(t => String(t).trim())
+                  .map(t => `<span class="text-[10px] bg-slate-900 border border-slate-800 text-slate-300 px-2 py-0.5 rounded-md font-mono">${escapeHtml(String(t).trim())}</span>`)
                   .join('')}
               </div>
 
               <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80">
                 ${app.appStore ? `
-                  <a href="${app.appStore}" target="_blank" class="flex-1 text-center bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white py-1.5 rounded-xl text-xs font-semibold transition border border-blue-500/30">
-                    App Store
+                  <a href="${escapeHtml(app.appStore)}" target="_blank" rel="noopener" class="flex-1 text-center bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white py-1.5 rounded-xl text-xs font-semibold transition border border-blue-500/30">
+                    View on App Store
                   </a>
-                ` : ''}
+                ` : `
+                  <span class="flex-1 text-center bg-slate-900 text-slate-500 py-1.5 rounded-xl text-xs font-medium border border-slate-800">
+                    Not yet released
+                  </span>
+                `}
                 ${app.github ? `
-                  <a href="${app.github}" target="_blank" class="p-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl border border-slate-700 transition" title="Source Code">
+                  <a href="${escapeHtml(app.github)}" target="_blank" rel="noopener" class="p-2 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl border border-slate-700 transition" title="Source Code">
                     <i data-lucide="github" class="w-4 h-4"></i>
                   </a>
                 ` : ''}
               </div>
             </div>
           </div>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
 
       lucide.createIcons();
     }
@@ -565,17 +900,19 @@
       container.innerHTML = projects.map(p => `
         <div class="p-4 flex items-center justify-between gap-4">
           <div class="flex items-center space-x-3">
-            <img src="${p.image || 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=200'}" class="w-12 h-12 rounded-xl object-cover border border-slate-800">
+            <div class="initial-tile w-12 h-12 rounded-xl border border-slate-800 flex items-center justify-center font-mono font-bold text-sm text-white/80">
+              ${escapeHtml(initialsOf(p.title))}
+            </div>
             <div>
-              <div class="font-bold text-sm text-white">${p.title}</div>
-              <div class="text-xs text-slate-400">${p.category} • ${p.impact || 'Live'}</div>
+              <div class="font-bold text-sm text-white">${escapeHtml(p.title)}</div>
+              <div class="text-xs text-slate-400">${escapeHtml(p.domain || 'iOS')} • ${escapeHtml(p.category === 'Live' ? 'On App Store' : 'In Development')}</div>
             </div>
           </div>
           <div class="flex items-center space-x-2">
-            <button onclick="editProject('${p.id}')" class="p-2 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-slate-800 transition">
+            <button onclick="editProject('${escapeHtml(p.id)}')" class="p-2 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-slate-800 transition">
               <i data-lucide="edit-3" class="w-4 h-4"></i>
             </button>
-            <button onclick="deleteProject('${p.id}')" class="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-800 transition">
+            <button onclick="deleteProject('${escapeHtml(p.id)}')" class="p-2 text-slate-400 hover:text-red-400 rounded-lg hover:bg-slate-800 transition">
               <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
           </div>
@@ -598,7 +935,8 @@
           document.getElementById('modalTitle').innerText = 'Edit iOS App';
           document.getElementById('formProjectId').value = item.id;
           document.getElementById('formTitle').value = item.title;
-          document.getElementById('formCategory').value = item.category || 'SwiftUI';
+          document.getElementById('formCategory').value = item.category === 'In Development' ? 'In Development' : 'Live';
+          document.getElementById('formDomain').value = item.domain || '';
           document.getElementById('formImpact').value = item.impact || '';
           document.getElementById('formDesc').value = item.desc;
           document.getElementById('formTech').value = Array.isArray(item.tech) ? item.tech.join(', ') : item.tech;
@@ -621,28 +959,29 @@
       const id = document.getElementById('formProjectId').value || Date.now().toString();
       const title = document.getElementById('formTitle').value;
       const category = document.getElementById('formCategory').value;
+      const domain = document.getElementById('formDomain').value;
       const impact = document.getElementById('formImpact').value;
       const desc = document.getElementById('formDesc').value;
       const tech = document.getElementById('formTech').value.split(',').map(s => s.trim()).filter(Boolean);
       const appStore = document.getElementById('formAppStore').value;
       const github = document.getElementById('formGithub').value;
-      const image = document.getElementById('formImage').value || 'https://images.unsplash.com/photo-1510519138195-068d82f8d469?w=600';
+      const image = document.getElementById('formImage').value;
 
       const fileInput = document.getElementById('formImageFile');
       if (fileInput.files && fileInput.files[0]) {
         const reader = new FileReader();
         reader.onload = function(evt) {
-          saveProjectData(id, title, category, impact, desc, tech, appStore, github, evt.target.result);
+          saveProjectData(id, title, category, domain, impact, desc, tech, appStore, github, evt.target.result);
         };
         reader.readAsDataURL(fileInput.files[0]);
       } else {
-        saveProjectData(id, title, category, impact, desc, tech, appStore, github, image);
+        saveProjectData(id, title, category, domain, impact, desc, tech, appStore, github, image);
       }
     }
 
-    function saveProjectData(id, title, category, impact, desc, tech, appStore, github, image) {
+    function saveProjectData(id, title, category, domain, impact, desc, tech, appStore, github, image) {
       const existingIdx = projects.findIndex(p => p.id === id);
-      const payload = { id, title, category, impact, desc, tech, appStore, github, image };
+      const payload = { id, title, category, domain, impact, desc, tech, appStore, github, image };
 
       if (existingIdx >= 0) {
         projects[existingIdx] = payload;
@@ -652,7 +991,7 @@
         showToast('New app successfully added');
       }
 
-      localStorage.setItem('hemant_ios_projects', JSON.stringify(projects));
+      persistProjects();
       closeProjectModal();
       renderAdminProjects();
     }
@@ -662,19 +1001,174 @@
     }
 
     function deleteProject(id) {
-      if (confirm('Are you sure you want to delete this app?')) {
-        projects = projects.filter(p => p.id !== id);
-        localStorage.setItem('hemant_ios_projects', JSON.stringify(projects));
-        renderAdminProjects();
-        showToast('App removed');
+      projects = projects.filter(p => p.id !== id);
+      persistProjects();
+      renderAdminProjects();
+      showToast('App removed');
+    }
+
+    // ===================== CONTACT FORM =====================
+    let contactPromptTimer = null;
+
+    function openContactModal(source) {
+      dismissVisitorPrompt(true);
+      const modal = document.getElementById('contactModal');
+      document.getElementById('contactSuccess').classList.add('hidden');
+      document.getElementById('contactForm').classList.remove('hidden');
+      hideContactError();
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+      setTimeout(() => document.getElementById('contactName')?.focus(), 150);
+    }
+
+    function closeContactModal() {
+      document.getElementById('contactModal').classList.add('hidden');
+    }
+
+    function handleContactBackdrop(event) {
+      if (event.target === event.currentTarget) closeContactModal();
+    }
+
+    function showContactError(msg) {
+      const el = document.getElementById('contactError');
+      el.innerText = msg;
+      el.classList.remove('hidden');
+    }
+
+    function hideContactError() {
+      document.getElementById('contactError').classList.add('hidden');
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+    }
+
+    function mailtoFallback(data) {
+      const subject = `Portfolio enquiry: ${data.reason} — ${data.name}`;
+      const body =
+        `Name: ${data.name}\n` +
+        `Email: ${data.email}\n` +
+        (data.company ? `Company: ${data.company}\n` : '') +
+        `About: ${data.reason}\n\n` +
+        `${data.message}\n`;
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    async function submitContactForm(event) {
+      event.preventDefault();
+      hideContactError();
+
+      // Honeypot — bots tick hidden fields, people don't.
+      if (document.getElementById('contactBotcheck').checked) return;
+
+      const data = {
+        name: document.getElementById('contactName').value.trim(),
+        email: document.getElementById('contactEmail').value.trim(),
+        company: document.getElementById('contactCompany').value.trim(),
+        reason: document.getElementById('contactReason').value,
+        message: document.getElementById('contactMessage').value.trim()
+      };
+
+      if (!data.name) return showContactError('Please add your name.');
+      if (!isValidEmail(data.email)) return showContactError('Please check your email address — I need it to reply.');
+      if (data.message.length < 10) return showContactError('Please add a line or two about what you need.');
+
+      const btn = document.getElementById('contactSubmitBtn');
+
+      // No form service configured yet: hand off to the visitor's email app.
+      if (!WEB3FORMS_ACCESS_KEY) {
+        mailtoFallback(data);
+        showToast('Opening your email app...');
+        return;
       }
+
+      btn.disabled = true;
+      btn.innerText = 'Sending...';
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_ACCESS_KEY,
+            subject: `Portfolio enquiry: ${data.reason} — ${data.name}`,
+            from_name: 'Portfolio contact form',
+            name: data.name,
+            email: data.email,
+            company: data.company || 'Not given',
+            reason: data.reason,
+            message: data.message
+          })
+        });
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          document.getElementById('contactForm').classList.add('hidden');
+          document.getElementById('contactSuccess').classList.remove('hidden');
+          document.getElementById('contactForm').reset();
+          lucide.createIcons();
+          showToast('Message sent — thanks!');
+        } else {
+          showContactError("That didn't go through. You can email me directly at " + CONTACT_EMAIL + '.');
+        }
+      } catch (err) {
+        showContactError('No connection. Please try again, or email me at ' + CONTACT_EMAIL + '.');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Send message';
+      }
+    }
+
+    // ---- First-visit prompt ----
+    function hasSeenVisitorPrompt() {
+      try { return localStorage.getItem(VISITOR_PROMPT_KEY) === '1'; }
+      catch (e) { return false; }
+    }
+
+    function markVisitorPromptSeen() {
+      try { localStorage.setItem(VISITOR_PROMPT_KEY, '1'); } catch (e) {}
+    }
+
+    function showVisitorPrompt() {
+      if (VISITOR_PROMPT_OPENS_FORM) {
+        markVisitorPromptSeen();
+        openContactModal('auto');
+        return;
+      }
+      const el = document.getElementById('visitorPrompt');
+      el.classList.remove('hidden');
+      requestAnimationFrame(() => el.classList.remove('translate-y-6', 'opacity-0'));
+      markVisitorPromptSeen();
+      lucide.createIcons();
+    }
+
+    function dismissVisitorPrompt(silent) {
+      if (contactPromptTimer) { clearTimeout(contactPromptTimer); contactPromptTimer = null; }
+      const el = document.getElementById('visitorPrompt');
+      if (!el || el.classList.contains('hidden')) return;
+      el.classList.add('translate-y-6', 'opacity-0');
+      setTimeout(() => el.classList.add('hidden'), 400);
+      markVisitorPromptSeen();
+    }
+
+    function scheduleVisitorPrompt() {
+      const isAdmin = (window.location.hash === '#admin') || window.location.search.includes('admin');
+      if (isAdmin || !VISITOR_PROMPT_DELAY_SECONDS || hasSeenVisitorPrompt()) return;
+      contactPromptTimer = setTimeout(showVisitorPrompt, VISITOR_PROMPT_DELAY_SECONDS * 1000);
     }
 
     // Init
     window.addEventListener('hashchange', checkRoute);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeContactModal();
+        closeProjectModal();
+      }
+    });
     window.addEventListener('DOMContentLoaded', () => {
       checkRoute();
       lucide.createIcons();
+      scheduleVisitorPrompt();
     });
   </script>
 </body>
